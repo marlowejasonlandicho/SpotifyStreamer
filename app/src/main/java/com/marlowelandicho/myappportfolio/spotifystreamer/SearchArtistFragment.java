@@ -12,23 +12,31 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import kaaes.spotify.webapi.android.SpotifyApi;
 import kaaes.spotify.webapi.android.SpotifyService;
+import kaaes.spotify.webapi.android.models.Artist;
+import kaaes.spotify.webapi.android.models.ArtistsPager;
+import kaaes.spotify.webapi.android.models.Image;
 
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class ArtistFragment extends Fragment {
+public class SearchArtistFragment extends Fragment {
 
     private String[] weatherResults;
     private ArrayAdapter arrayAdapter;
+    private SimpleAdapter simpleAdapter;
 
-    public ArtistFragment() {
+    public SearchArtistFragment() {
     }
 
     @Override
@@ -45,9 +53,9 @@ public class ArtistFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.artist_fragment_main, container, false);
-        List forecastList = new ArrayList<String>();
-        forecastList.add("");
+        View rootView = inflater.inflate(R.layout.fragment_artist_search, container, false);
+//        List forecastList = new ArrayList<String>();
+//        forecastList.add("");
 
 //        arrayAdapter = new ArrayAdapter<String>(
 //                getActivity(),
@@ -67,6 +75,30 @@ public class ArtistFragment extends Fragment {
 //
 //            }
 //        });
+
+
+        ListView lv = (ListView) rootView.findViewById(R.id.list_view_artist_search_result);
+
+        // create the grid item mapping
+        String[] from = new String[]{"id", "name", "url", "height", "width"};
+        int[] to = new int[]{R.id.item1, R.id.item2, R.id.item3, R.id.item4};
+
+        // prepare the list of all records
+        List<HashMap<String, String>> resultList = new ArrayList<HashMap<String, String>>();
+        for (int i = 0; i < 10; i++) {
+            HashMap<String, String> artistMap = new HashMap<String, String>();
+            artistMap.put("id", "" + i);
+            artistMap.put("name", "col_1_item_" + i);
+            artistMap.put("url", "url" + i);
+            artistMap.put("height", "col_2_item_" + i);
+            artistMap.put("width", "col_3_item_" + i);
+            resultList.add(artistMap);
+        }
+
+        // fill in the grid_item layout
+        SimpleAdapter adapter = new SimpleAdapter(this, fillMaps, R.layout.grid_item, from, to);
+        lv.setAdapter(adapter);
+
 
         return rootView;
     }
@@ -100,7 +132,7 @@ public class ArtistFragment extends Fragment {
     }
 
 
-    public class SpotifyAPITask extends AsyncTask<String, Void, String[]> {
+    public class SpotifyAPITask extends AsyncTask<String, Void, List<Map<String, String>>> {
 
         private final String LOG_TAG = SpotifyAPITask.class.getSimpleName();
         private String postalCode;
@@ -109,43 +141,45 @@ public class ArtistFragment extends Fragment {
         }
 
         @Override
-        protected void onPostExecute(String[] result) {
-            arrayAdapter.clear();
-            for (String resultStr : result) {
-                arrayAdapter.add(resultStr);
-            }
+        protected void onPostExecute(List<Map<String, String>> result) {
+
+//            arrayAdapter.clear();
+//            for (String resultStr : result) {
+//                arrayAdapter.add(resultStr);
+//            }
         }
 
 
         @Override
-        protected String[] doInBackground(String... params) {
-
-
+        protected List<Map<String, String>> doInBackground(String... params) {
             try {
-                SpotifyApi api = new SpotifyApi();
+                if (params.length == 0) {
+                    return null;
+                }
+                String artistQuery = params[0];
 
-//                api.setAccessToken("myAccessToken");
+                SpotifyApi api = new SpotifyApi();
                 SpotifyService spotify = api.getService();
-//                spotify.searchArtists();
-//                spotify.getAlbum("2dIGnmEIy1WZIcZCFSj6i8", new Callback<Album>() {
-//                    @Override
-//                    public void success(Album album, Response response) {
-//                        Log.d("Album success", album.name);
-//                    }
-//
-//                    @Override
-//                    public void failure(RetrofitError error) {
-//                        Log.d("Album failure", error.toString());
-//                    }
-//                });
+
+                ArtistsPager artistsPager = spotify.searchArtists(artistQuery);
+                List<Artist> artistList = artistsPager.artists.items;
+                for (Artist artist : artistList) {
+                    String artistId = artist.id;
+                    String artistName = artist.name;
+                    List<Image> artistImages = artist.images;
+                }
+
+                return null;
 
             } finally {
 
             }
-            return null;
         }
 
-
+        return null;
     }
+
+
+}
 
 }
