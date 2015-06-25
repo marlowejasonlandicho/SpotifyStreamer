@@ -2,6 +2,8 @@ package com.marlowelandicho.myappportfolio.spotifystreamer;
 
 import android.app.Activity;
 import android.content.Context;
+import android.net.Uri;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,9 +53,11 @@ public class ArtistAdapter extends BaseAdapter {
             artistViewHolder = (ArtistViewHolder) artistView.getTag();
         }
 
+
         Artist artist = (Artist) getItem(position);
         if (artist.images.size() == 3) {
-//            artistViewHolder.artistImageView.setImageResource(artist.images.get(2));
+            Uri imageUri = Uri.parse(String.valueOf(artist.images.get(2)));
+            artistViewHolder.artistImageView.setImageURI(imageUri);
 
         }
         artistViewHolder.txtViewArtistName.setText(artist.name);

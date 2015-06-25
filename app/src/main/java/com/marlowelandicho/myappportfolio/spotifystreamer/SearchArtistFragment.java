@@ -5,15 +5,17 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,9 +34,7 @@ import kaaes.spotify.webapi.android.models.Image;
  */
 public class SearchArtistFragment extends Fragment {
 
-    private String[] weatherResults;
-    private ArrayAdapter arrayAdapter;
-    private SimpleAdapter simpleAdapter;
+    private ArtistAdapter artistAdapter;
 
     public SearchArtistFragment() {
     }
@@ -54,14 +54,62 @@ public class SearchArtistFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_artist_search, container, false);
-//        List forecastList = new ArrayList<String>();
-//        forecastList.add("");
+
+
+        FragmentActivity fragmentActivity = getActivity();
+        int listItemLayout = R.layout.list_item_individual_artist_search;
+        int listItem = R.id.list_view_artist_search_result;
+
+
+        ListView listView = (ListView) rootView.findViewById(R.id.list_view_artist_search_result);
+        ArtistAdapter adapter = new ArtistAdapter(this, rowItems);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                String foreCast = (String) parent.getItemAtPosition(position);
+//                Intent detailActivityIntent = new Intent(getActivity(), DetailActivity.class)
+//                        .putExtra(Intent.EXTRA_TEXT, foreCast);
+//                startActivity(detailActivityIntent);
+
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(getActivity().getApplicationContext(), "TEST", duration);
+                toast.show();
+            }
+        });
+
 
 //        arrayAdapter = new ArrayAdapter<String>(
 //                getActivity(),
 //                R.layout.list_item_layout,
 //                R.id.list_item_forecast_textview,
 //                forecastList);
+//
+//        ListView listView = (ListView) rootView.findViewById(R.id.list_view_forecast);
+//        listView.setAdapter(arrayAdapter);
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                String foreCast = (String) parent.getItemAtPosition(position);
+//                Intent detailActivityIntent = new Intent(getActivity(), DetailActivity.class)
+//                        .putExtra(Intent.EXTRA_TEXT, foreCast);
+//                startActivity(detailActivityIntent);
+//
+////                int duration = Toast.LENGTH_SHORT;
+////                Toast toast = Toast.makeText(getActivity().getApplicationContext(), foreCast, duration);
+////                toast.show();
+//            }
+//        });
+
+
+//        List forecastList = new ArrayList<String>();
+//        forecastList.add("");
+
+        artistAdapter = new ArrayAdapter<Artist>(
+                getActivity(),
+                R.layout.list_item_layout,
+                R.id.list_item_forecast_textview,
+                forecastList);
 //
 //        ListView listView = (ListView) rootView.findViewById(R.id.list_view_forecast);
 //        listView.setAdapter(arrayAdapter);
