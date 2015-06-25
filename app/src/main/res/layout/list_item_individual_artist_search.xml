@@ -5,19 +5,19 @@
 
     <ImageView
         android:id="@+id/image_view_artist"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
         android:gravity="center|center_vertical|center"
         android:src="@mipmap/ic_launcher" />
 
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/text_view_artist_name"
         android:layout_width="fill_parent"
-        android:layout_height="80dp"
+        android:layout_height="64dp"
         android:layout_toRightOf="@+id/image_view_artist"
         android:gravity="center|center_vertical|start|center_horizontal"
         android:minHeight="?android:attr/listPreferredItemHeight"
         android:paddingLeft="10dp"
         android:text="Artist name goes here..."
         android:textSize="16dp" />
-</RelativeLayout><!-- From: file:/Users/marlowe.landicho/AndroidStudioProjects/SpotifyStreamer/app/src/main/res/layout/fragment_individual_artist_search.xml -->
+</RelativeLayout>

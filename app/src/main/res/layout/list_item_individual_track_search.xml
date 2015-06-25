@@ -5,8 +5,8 @@
 
     <ImageView
         android:id="@+id/image_view_track"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
         android:gravity="center|center_vertical|center"
         android:src="@mipmap/ic_launcher" />
 
@@ -14,7 +14,7 @@
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/text_view_track_name"
         android:layout_width="fill_parent"
-        android:layout_height="40dp"
+        android:layout_height="32dp"
         android:layout_centerHorizontal="true"
         android:layout_toRightOf="@+id/image_view_track"
         android:gravity="bottom"
@@ -25,7 +25,7 @@
     <TextView
         android:id="@+id/text_view_album_name"
         android:layout_width="fill_parent"
-        android:layout_height="40dp"
+        android:layout_height="32dp"
         android:layout_below="@+id/text_view_track_name"
         android:layout_toRightOf="@+id/image_view_track"
         android:gravity="top"
@@ -33,4 +33,4 @@
         android:text="Album name goes here..."
         android:textSize="16dp" />
 
-</RelativeLayout><!-- From: file:/Users/marlowe.landicho/AndroidStudioProjects/SpotifyStreamer/app/src/main/res/layout/fragment_individual_track_search.xml -->
+</RelativeLayout>

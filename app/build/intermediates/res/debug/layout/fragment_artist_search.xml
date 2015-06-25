@@ -13,7 +13,8 @@
         android:id="@+id/input_artist_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/input_artist_name_message" />
+        android:hint="@string/input_artist_name_message"
+        android:inputType="textPersonName"/>
 
     <ListView
         android:id="@+id/list_view_artist_search_result"

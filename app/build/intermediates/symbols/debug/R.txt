@@ -416,8 +416,8 @@ int id action_menu_presenter 0x7f0c0003
 int id action_mode_bar 0x7f0c003d
 int id action_mode_bar_stub 0x7f0c003c
 int id action_mode_close_button 0x7f0c0025
-int id action_refresh 0x7f0c0057
-int id action_settings 0x7f0c0058
+int id action_refresh 0x7f0c0058
+int id action_settings 0x7f0c0059
 int id activity_chooser_view_content 0x7f0c0026
 int id alertTitle 0x7f0c0030
 int id always 0x7f0c0016
@@ -449,7 +449,7 @@ int id input_artist_name 0x7f0c0050
 int id listMode 0x7f0c0009
 int id list_item 0x7f0c002a
 int id list_view_artist_search_result 0x7f0c0051
-int id list_view_track_search_result 0x7f0c0056
+int id list_view_track_search_result 0x7f0c0057
 int id middle 0x7f0c0015
 int id multiply 0x7f0c001e
 int id never 0x7f0c0019
@@ -483,6 +483,7 @@ int id src_over 0x7f0c0022
 int id submit_area 0x7f0c004b
 int id tabMode 0x7f0c000b
 int id textSpacerNoButtons 0x7f0c0033
+int id text_view_album_name 0x7f0c0056
 int id text_view_artist_name 0x7f0c0053
 int id text_view_track_name 0x7f0c0055
 int id title 0x7f0c002c

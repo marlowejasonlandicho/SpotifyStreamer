@@ -25,50 +25,54 @@ public class ArtistAdapter extends BaseAdapter {
         this.artistList = artistList;
     }
 
-    /*private view holder class*/
-    private class ViewHolder {
-        ImageView imageView;
-        TextView txtTitle;
-        TextView txtDesc;
+    private class ArtistViewHolder {
+        ImageView artistImageView;
+        TextView txtViewArtistName;
     }
 
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder = null;
+//    private class TrackViewHolder {
+//        ImageView albumImageView;
+//        TextView txtViewTrackName;
+//        TextView txtViewAlbumName;
+//    }
+
+    public View getView(int position, View artistView, ViewGroup parent) {
+        ArtistViewHolder artistViewHolder = null;
 
         LayoutInflater mInflater = (LayoutInflater)
                 context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-        if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.list_item, null);
-            holder = new ViewHolder();
-            holder.txtDesc = (TextView) convertView.findViewById(R.id.desc);
-            holder.txtTitle = (TextView) convertView.findViewById(R.id.title);
-            holder.imageView = (ImageView) convertView.findViewById(R.id.icon);
-            convertView.setTag(holder);
+        if (artistView == null) {
+            artistView = mInflater.inflate(R.layout.list_item_individual_artist_search, null);
+            artistViewHolder = new ArtistViewHolder();
+            artistViewHolder.artistImageView = (ImageView) artistView.findViewById(R.id.image_view_artist);
+            artistViewHolder.txtViewArtistName = (TextView) artistView.findViewById(R.id.text_view_artist_name);
+            artistView.setTag(artistViewHolder);
         } else {
-            holder = (ViewHolder) convertView.getTag();
+            artistViewHolder = (ArtistViewHolder) artistView.getTag();
         }
 
-        Artist rowItem = (Artist) getItem(position);
+        Artist artist = (Artist) getItem(position);
+        if (artist.images.size() == 3) {
+//            artistViewHolder.artistImageView.setImageResource(artist.images.get(2));
 
-        holder.txtDesc.setText(rowItem.getDesc());
-        holder.txtTitle.setText(rowItem.getTitle());
-        holder.imageView.setImageResource(rowItem.getImageId());
+        }
+        artistViewHolder.txtViewArtistName.setText(artist.name);
 
-        return convertView;
+        return artistView;
     }
 
     @Override
     public int getCount() {
-        return rowItems.size();
+        return artistList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return rowItems.get(position);
+        return artistList.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return rowItems.indexOf(getItem(position));
+        return artistList.indexOf(getItem(position));
     }
 }

@@ -1523,8 +1523,8 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f0c003d;
         public static final int action_mode_bar_stub=0x7f0c003c;
         public static final int action_mode_close_button=0x7f0c0025;
-        public static final int action_refresh=0x7f0c0057;
-        public static final int action_settings=0x7f0c0058;
+        public static final int action_refresh=0x7f0c0058;
+        public static final int action_settings=0x7f0c0059;
         public static final int activity_chooser_view_content=0x7f0c0026;
         public static final int alertTitle=0x7f0c0030;
         public static final int always=0x7f0c0016;
@@ -1556,7 +1556,7 @@ containing a value of this type.
         public static final int listMode=0x7f0c0009;
         public static final int list_item=0x7f0c002a;
         public static final int list_view_artist_search_result=0x7f0c0051;
-        public static final int list_view_track_search_result=0x7f0c0056;
+        public static final int list_view_track_search_result=0x7f0c0057;
         public static final int middle=0x7f0c0015;
         public static final int multiply=0x7f0c001e;
         public static final int never=0x7f0c0019;
@@ -1590,6 +1590,7 @@ containing a value of this type.
         public static final int submit_area=0x7f0c004b;
         public static final int tabMode=0x7f0c000b;
         public static final int textSpacerNoButtons=0x7f0c0033;
+        public static final int text_view_album_name=0x7f0c0056;
         public static final int text_view_artist_name=0x7f0c0053;
         public static final int text_view_track_name=0x7f0c0055;
         public static final int title=0x7f0c002c;
@@ -1633,8 +1634,8 @@ containing a value of this type.
         public static final int abc_simple_dropdown_hint=0x7f040018;
         public static final int activity_main=0x7f040019;
         public static final int fragment_artist_search=0x7f04001a;
-        public static final int fragment_individual_artist_search=0x7f04001b;
-        public static final int fragment_individual_track_search=0x7f04001c;
+        public static final int list_item_individual_artist_search =0x7f04001b;
+        public static final int list_item_individual_track_search =0x7f04001c;
         public static final int fragment_track_search=0x7f04001d;
         public static final int select_dialog_item_material=0x7f04001e;
         public static final int select_dialog_multichoice_material=0x7f04001f;

@@ -81,7 +81,7 @@ public class SearchArtistFragment extends Fragment {
 
         // create the grid item mapping
         String[] from = new String[]{"id", "name", "url", "height", "width"};
-        int[] to = new int[]{R.id.item1, R.id.item2, R.id.item3, R.id.item4};
+//        int[] to = new int[]{R.id.item1, R.id.item2, R.id.item3, R.id.item4};
 
         // prepare the list of all records
         List<HashMap<String, String>> resultList = new ArrayList<HashMap<String, String>>();
@@ -96,8 +96,8 @@ public class SearchArtistFragment extends Fragment {
         }
 
         // fill in the grid_item layout
-        SimpleAdapter adapter = new SimpleAdapter(this, fillMaps, R.layout.grid_item, from, to);
-        lv.setAdapter(adapter);
+//        SimpleAdapter adapter = new SimpleAdapter(this, fillMaps, R.layout.grid_item, from, to);
+//        lv.setAdapter(adapter);
 
 
         return rootView;
@@ -152,6 +152,7 @@ public class SearchArtistFragment extends Fragment {
 
         @Override
         protected List<Map<String, String>> doInBackground(String... params) {
+            List<Map<String, String>> mapArrayList = new ArrayList<Map<String, String>>();
             try {
                 if (params.length == 0) {
                     return null;
@@ -169,14 +170,15 @@ public class SearchArtistFragment extends Fragment {
                     List<Image> artistImages = artist.images;
                 }
 
-                return null;
+                return mapArrayList;
 
             } finally {
 
             }
+//            return mapArrayList;
+
         }
 
-        return null;
     }
 
 
