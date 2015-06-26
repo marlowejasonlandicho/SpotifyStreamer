@@ -3,7 +3,6 @@ package com.marlowelandicho.myappportfolio.spotifystreamer;
 import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
-import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +43,7 @@ public class ArtistAdapter extends BaseAdapter {
         LayoutInflater mInflater = (LayoutInflater)
                 context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         if (artistView == null) {
-            artistView = mInflater.inflate(R.layout.list_item_individual_artist_search, null);
+            artistView = mInflater.inflate(R.layout.list_item_individual_artist_search, parent, false);
             artistViewHolder = new ArtistViewHolder();
             artistViewHolder.artistImageView = (ImageView) artistView.findViewById(R.id.image_view_artist);
             artistViewHolder.txtViewArtistName = (TextView) artistView.findViewById(R.id.text_view_artist_name);
@@ -70,6 +69,7 @@ public class ArtistAdapter extends BaseAdapter {
         return artistList.size();
     }
 
+
     @Override
     public Object getItem(int position) {
         return artistList.get(position);
@@ -78,5 +78,9 @@ public class ArtistAdapter extends BaseAdapter {
     @Override
     public long getItemId(int position) {
         return artistList.indexOf(getItem(position));
+    }
+
+    public void add(Artist artist) {
+        artistList.add(artist);
     }
 }

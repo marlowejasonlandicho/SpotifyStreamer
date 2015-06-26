@@ -7,14 +7,15 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".ArtistFragment">
+    tools:context=".SearchArtistFragment">
 
     <EditText
         android:id="@+id/input_artist_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/input_artist_name_message"
-        android:inputType="textPersonName"/>
+        android:imeOptions="actionSearch"
+        android:inputType="textPersonName|textNoSuggestions" />
 
     <ListView
         android:id="@+id/list_view_artist_search_result"
