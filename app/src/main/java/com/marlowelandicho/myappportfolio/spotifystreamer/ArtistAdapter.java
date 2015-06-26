@@ -2,7 +2,6 @@ package com.marlowelandicho.myappportfolio.spotifystreamer;
 
 import android.app.Activity;
 import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,14 +9,21 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import kaaes.spotify.webapi.android.models.Artist;
+import kaaes.spotify.webapi.android.models.Image;
 
 /**
  * Created by marlowe.landicho on 24/6/15.
  */
 public class ArtistAdapter extends BaseAdapter {
+
+    private final String LOG_TAG = ArtistAdapter.class.getSimpleName();
+
+
     Context context;
     List<Artist> artistList;
 
@@ -42,6 +48,9 @@ public class ArtistAdapter extends BaseAdapter {
 
         LayoutInflater mInflater = (LayoutInflater)
                 context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+
+        Artist artist = (Artist) getItem(position);
+
         if (artistView == null) {
             artistView = mInflater.inflate(R.layout.list_item_individual_artist_search, parent, false);
             artistViewHolder = new ArtistViewHolder();
@@ -52,13 +61,17 @@ public class ArtistAdapter extends BaseAdapter {
             artistViewHolder = (ArtistViewHolder) artistView.getTag();
         }
 
-
-        Artist artist = (Artist) getItem(position);
-        if (artist.images.size() == 3) {
-            Uri imageUri = Uri.parse(String.valueOf(artist.images.get(2)));
-            artistViewHolder.artistImageView.setImageURI(imageUri);
-
+        for (Image image : artist.images) {
+            if (image.height <= 64) {
+                Picasso.with(context)
+                        .load(image.url)
+                        .resize(50, 50)
+                        .centerCrop()
+                        .into(artistViewHolder.artistImageView);
+                break;
+            }
         }
+
         artistViewHolder.txtViewArtistName.setText(artist.name);
 
         return artistView;
@@ -78,6 +91,11 @@ public class ArtistAdapter extends BaseAdapter {
     @Override
     public long getItemId(int position) {
         return artistList.indexOf(getItem(position));
+    }
+
+
+    public void clear() {
+        artistList.clear();
     }
 
     public void add(Artist artist) {

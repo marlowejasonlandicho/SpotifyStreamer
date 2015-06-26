@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/input_artist_name_message"
         android:imeOptions="actionSearch"
-        android:inputType="textPersonName|textNoSuggestions" />
+        android:inputType="textNoSuggestions" />
 
     <ListView
         android:id="@+id/list_view_artist_search_result"

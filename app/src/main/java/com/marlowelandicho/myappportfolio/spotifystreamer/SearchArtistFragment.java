@@ -35,6 +35,7 @@ public class SearchArtistFragment extends Fragment {
 
     private ArtistAdapter artistAdapter;
     private List<Artist> searchArtistResultList = new ArrayList<>();
+    private String q;
 
     public SearchArtistFragment() {
     }
@@ -55,18 +56,12 @@ public class SearchArtistFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_artist_search, container, false);
 
-
-//        FragmentActivity fragmentActivity = getActivity();
-//        int listItemLayout = R.layout.list_item_individual_artist_search;
-//        int listItem = R.id.list_view_artist_search_result;
-
-
         EditText inputArtistNameTextView = (EditText) rootView.findViewById(R.id.input_artist_name);
         inputArtistNameTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    String q = v.getText().toString();
+                    q = v.getText().toString();
                     if (q != null && q.length() > 0) {
                         updateArtistResult(q);
                         return false;
@@ -92,7 +87,6 @@ public class SearchArtistFragment extends Fragment {
                 toast.show();
             }
         });
-
 
         return rootView;
     }
@@ -134,16 +128,22 @@ public class SearchArtistFragment extends Fragment {
 
         @Override
         protected void onPostExecute(List<Artist> result) {
-            for (Artist artistResult : result) {
-                artistAdapter.add(artistResult);
+            artistAdapter.clear();
+            if (result != null && result.isEmpty()) {
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(getActivity().getApplicationContext(), getString(R.string.artist_no_result), duration);
+                toast.show();
+            } else {
+                for (Artist artistResult : result) {
+                    artistAdapter.add(artistResult);
+                }
             }
             artistAdapter.notifyDataSetChanged();
-        }
 
+        }
 
         @Override
         protected List<Artist> doInBackground(String... params) {
-//            List<Artist> artistResultList = new ArrayList<Artist>();
             if (params.length == 0) {
                 return null;
             }
@@ -155,11 +155,15 @@ public class SearchArtistFragment extends Fragment {
             ArtistsPager artistsPager = spotifyService.searchArtists(artistQuery);
             List<Artist> artistList = artistsPager.artists.items;
             return artistList;
-//            return artistResultList;
-
         }
-
     }
 
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (q != null && q.length() > 0) {
+            updateArtistResult(q);
+        }
+    }
 }

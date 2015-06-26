@@ -2,13 +2,6 @@
 <items version="2" >
 
     <item
-        jar="/Users/marlowe.landicho/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/okhttp/2.2.0/959c454243581fdf730abfd4f4745441724bcf2c/okhttp-2.2.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="959c454243581fdf730abfd4f4745441724bcf2c">
-        <dex dex="/Users/marlowe.landicho/AndroidStudioProjects/SpotifyStreamer/app/build/intermediates/pre-dexed/debug/okhttp-2.2.0-053d85699ed9c5a9795e45635c1ae0c00e0f56e0.jar" />
-    </item>
-    <item
         jar="/Users/marlowe.landicho/AndroidStudioProjects/SpotifyStreamer/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.1.1/jars/libs/internal_impl-22.1.1.jar"
         jumboMode="false"
         revision="22.0.1"
@@ -16,18 +9,25 @@
         <dex dex="/Users/marlowe.landicho/AndroidStudioProjects/SpotifyStreamer/app/build/intermediates/pre-dexed/debug/internal_impl-22.1.1-cd303c2d1003a2d911e4cf4213bde9d17075d6ed.jar" />
     </item>
     <item
-        jar="/Users/marlowe.landicho/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3.1/ecb6e1f8e4b0e84c4b886c2f14a1500caf309757/gson-2.3.1.jar"
+        jar="/Users/marlowe.landicho/AndroidStudioProjects/SpotifyStreamer/app/build/intermediates/exploded-aar/spotify-web-api-android-0.1.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
-        <dex dex="/Users/marlowe.landicho/AndroidStudioProjects/SpotifyStreamer/app/build/intermediates/pre-dexed/debug/gson-2.3.1-f0981208d15a510ed9606be0b93bcfd59a6beabf.jar" />
+        sha1="4f9a724bb7307588c0c9ebfe4a11c70f18048651">
+        <dex dex="/Users/marlowe.landicho/AndroidStudioProjects/SpotifyStreamer/app/build/intermediates/pre-dexed/debug/classes-12ca77e15e3884ed6005d29d5157ad609d1b2414.jar" />
     </item>
     <item
-        jar="/Users/marlowe.landicho/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit/retrofit/1.9.0/a681c044244d9fc375198588297a39ba78028423/retrofit-1.9.0.jar"
+        jar="/Users/marlowe.landicho/AndroidStudioProjects/SpotifyStreamer/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.1.1/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="a681c044244d9fc375198588297a39ba78028423">
-        <dex dex="/Users/marlowe.landicho/AndroidStudioProjects/SpotifyStreamer/app/build/intermediates/pre-dexed/debug/retrofit-1.9.0-8c43f0388cd55f039387e04f13d66a5e869b781c.jar" />
+        sha1="c95ba8152923e4872e86a82cfcba9a51c0214328">
+        <dex dex="/Users/marlowe.landicho/AndroidStudioProjects/SpotifyStreamer/app/build/intermediates/pre-dexed/debug/classes-4b93c9e60ad5fc6d1b719fee7fc2775682538e11.jar" />
+    </item>
+    <item
+        jar="/Users/marlowe.landicho/AndroidStudioProjects/SpotifyStreamer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a3ff3c506644c820eb2bdf06e8339f72be578551">
+        <dex dex="/Users/marlowe.landicho/AndroidStudioProjects/SpotifyStreamer/app/build/intermediates/pre-dexed/debug/classes-4ee975e46fb91353b7899e308331aae86630da43.jar" />
     </item>
     <item
         jar="/Applications/android-sdk-macosx/extras/android/m2repository/com/android/support/support-annotations/22.1.1/support-annotations-22.1.1.jar"
@@ -51,25 +51,25 @@
         <dex dex="/Users/marlowe.landicho/AndroidStudioProjects/SpotifyStreamer/app/build/intermediates/pre-dexed/debug/picasso-2.5.2-c442cb353234eefe238e107b12ad0d40a9339413.jar" />
     </item>
     <item
-        jar="/Users/marlowe.landicho/AndroidStudioProjects/SpotifyStreamer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/jars/classes.jar"
+        jar="/Users/marlowe.landicho/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit/retrofit/1.9.0/a681c044244d9fc375198588297a39ba78028423/retrofit-1.9.0.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="a3ff3c506644c820eb2bdf06e8339f72be578551">
-        <dex dex="/Users/marlowe.landicho/AndroidStudioProjects/SpotifyStreamer/app/build/intermediates/pre-dexed/debug/classes-4ee975e46fb91353b7899e308331aae86630da43.jar" />
+        sha1="a681c044244d9fc375198588297a39ba78028423">
+        <dex dex="/Users/marlowe.landicho/AndroidStudioProjects/SpotifyStreamer/app/build/intermediates/pre-dexed/debug/retrofit-1.9.0-8c43f0388cd55f039387e04f13d66a5e869b781c.jar" />
     </item>
     <item
-        jar="/Users/marlowe.landicho/AndroidStudioProjects/SpotifyStreamer/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.1.1/jars/classes.jar"
+        jar="/Users/marlowe.landicho/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3.1/ecb6e1f8e4b0e84c4b886c2f14a1500caf309757/gson-2.3.1.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="c95ba8152923e4872e86a82cfcba9a51c0214328">
-        <dex dex="/Users/marlowe.landicho/AndroidStudioProjects/SpotifyStreamer/app/build/intermediates/pre-dexed/debug/classes-4b93c9e60ad5fc6d1b719fee7fc2775682538e11.jar" />
+        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
+        <dex dex="/Users/marlowe.landicho/AndroidStudioProjects/SpotifyStreamer/app/build/intermediates/pre-dexed/debug/gson-2.3.1-f0981208d15a510ed9606be0b93bcfd59a6beabf.jar" />
     </item>
     <item
-        jar="/Users/marlowe.landicho/AndroidStudioProjects/SpotifyStreamer/app/build/intermediates/exploded-aar/spotify-web-api-android-0.1.0/jars/classes.jar"
+        jar="/Users/marlowe.landicho/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/okhttp/2.2.0/959c454243581fdf730abfd4f4745441724bcf2c/okhttp-2.2.0.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="4f9a724bb7307588c0c9ebfe4a11c70f18048651">
-        <dex dex="/Users/marlowe.landicho/AndroidStudioProjects/SpotifyStreamer/app/build/intermediates/pre-dexed/debug/classes-12ca77e15e3884ed6005d29d5157ad609d1b2414.jar" />
+        sha1="959c454243581fdf730abfd4f4745441724bcf2c">
+        <dex dex="/Users/marlowe.landicho/AndroidStudioProjects/SpotifyStreamer/app/build/intermediates/pre-dexed/debug/okhttp-2.2.0-053d85699ed9c5a9795e45635c1ae0c00e0f56e0.jar" />
     </item>
 
 </items>
