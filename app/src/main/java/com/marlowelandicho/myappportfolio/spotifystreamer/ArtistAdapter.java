@@ -37,12 +37,6 @@ public class ArtistAdapter extends BaseAdapter {
         TextView txtViewArtistName;
     }
 
-//    private class TrackViewHolder {
-//        ImageView albumImageView;
-//        TextView txtViewTrackName;
-//        TextView txtViewAlbumName;
-//    }
-
     public View getView(int position, View artistView, ViewGroup parent) {
         ArtistViewHolder artistViewHolder = null;
 
@@ -62,7 +56,7 @@ public class ArtistAdapter extends BaseAdapter {
         }
 
         for (Image image : artist.images) {
-            if (image.height <= 64) {
+            if (image.height <= 64 && image.url != null) {
                 Picasso.with(context)
                         .load(image.url)
                         .resize(50, 50)

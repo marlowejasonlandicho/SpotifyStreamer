@@ -1,9 +1,8 @@
 package com.marlowelandicho.myappportfolio.spotifystreamer;
 
-import android.content.SharedPreferences;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -48,7 +47,7 @@ public class SearchArtistFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.artistfragment, menu);
+        inflater.inflate(R.menu.menu_main, menu);
     }
 
     @Override
@@ -78,13 +77,12 @@ public class SearchArtistFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Artist selectedArtist = (Artist) parent.getItemAtPosition(position);
-//                Intent detailActivityIntent = new Intent(getActivity(), DetailActivity.class)
-//                        .putExtra(Intent.EXTRA_TEXT, foreCast);
-//                startActivity(detailActivityIntent);
+                Intent trackListActivityIntent = new Intent(getActivity(), TrackListActivity.class).putExtra(Intent.EXTRA_TEXT, selectedArtist.id);
+                startActivity(trackListActivityIntent);
 
-                int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(getActivity().getApplicationContext(), selectedArtist.name, duration);
-                toast.show();
+//                int duration = Toast.LENGTH_SHORT;
+//                Toast toast = Toast.makeText(getActivity().getApplicationContext(), selectedArtist.name, duration);
+//                toast.show();
             }
         });
 
@@ -96,14 +94,9 @@ public class SearchArtistFragment extends Fragment {
         super.onStart();
     }
 
-
     private void updateArtistResult(String q) {
         SearchArtistTask searchArtistTask = new SearchArtistTask();
         searchArtistTask.execute(q);
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-//        String location = prefs.getString(getString(R.string.pref_location_key),
-//                getString(R.string.pref_location_default));
-//        spotifyAPITask.execute(location);
     }
 
     @Override
@@ -119,6 +112,15 @@ public class SearchArtistFragment extends Fragment {
     }
 
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (q != null && q.length() > 0) {
+            updateArtistResult(q);
+        }
+    }
+
+
     public class SearchArtistTask extends AsyncTask<String, Void, List<Artist>> {
 
         private final String LOG_TAG = SearchArtistTask.class.getSimpleName();
@@ -129,7 +131,7 @@ public class SearchArtistFragment extends Fragment {
         @Override
         protected void onPostExecute(List<Artist> result) {
             artistAdapter.clear();
-            if (result != null && result.isEmpty()) {
+            if (result == null || result.isEmpty()) {
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(getActivity().getApplicationContext(), getString(R.string.artist_no_result), duration);
                 toast.show();
@@ -154,16 +156,15 @@ public class SearchArtistFragment extends Fragment {
 
             ArtistsPager artistsPager = spotifyService.searchArtists(artistQuery);
             List<Artist> artistList = artistsPager.artists.items;
+
+//            List<Artist> artistList = new ArrayList<>();
+//            Artist artist = new Artist();
+//            artist.name = "Artist 1";
+//            artistList.add(artist);
+
             return artistList;
         }
     }
 
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (q != null && q.length() > 0) {
-            updateArtistResult(q);
-        }
-    }
 }

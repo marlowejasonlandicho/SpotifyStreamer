@@ -7,32 +7,39 @@
 
     <ImageView
         android:id="@+id/image_view_track"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:gravity="center|center_vertical|center"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:src="@mipmap/ic_launcher" />
 
 
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/text_view_track_name"
         android:layout_width="fill_parent"
-        android:layout_height="32dp"
+        android:layout_height="30dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/image_view_track"
         android:gravity="bottom"
-        android:paddingLeft="10dp"
-        android:text="Artist name goes here..."
-        android:textSize="16dp" />
+        android:minHeight="?android:attr/listPreferredItemHeight"
+        android:text="Artist name goes here..." />
 
     <TextView
         android:id="@+id/text_view_album_name"
         android:layout_width="fill_parent"
-        android:layout_height="32dp"
+        android:layout_height="30dp"
         android:layout_below="@+id/text_view_track_name"
+        android:layout_marginLeft="10dp"
         android:layout_toRightOf="@+id/image_view_track"
         android:gravity="top"
-        android:paddingLeft="10dp"
-        android:text="Album name goes here..."
-        android:textSize="16dp" />
+        android:text="Album name goes here..." />
 
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="10dp"
+        android:layout_below="@+id/image_view_track"
+        android:layout_marginBottom="10dp"
+        android:minHeight="?android:attr/listPreferredItemHeight" />
 </RelativeLayout>

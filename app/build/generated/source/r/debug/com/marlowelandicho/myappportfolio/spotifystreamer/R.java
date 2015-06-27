@@ -1523,8 +1523,8 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f0c003d;
         public static final int action_mode_bar_stub=0x7f0c003c;
         public static final int action_mode_close_button=0x7f0c0025;
-        public static final int action_refresh=0x7f0c0058;
-        public static final int action_settings=0x7f0c0059;
+        public static final int action_refresh=0x7f0c005b;
+        public static final int action_settings=0x7f0c005a;
         public static final int activity_chooser_view_content=0x7f0c0026;
         public static final int alertTitle=0x7f0c0030;
         public static final int always=0x7f0c0016;
@@ -1550,13 +1550,15 @@ containing a value of this type.
         public static final int icon=0x7f0c002b;
         public static final int ifRoom=0x7f0c0018;
         public static final int image=0x7f0c0028;
-        public static final int image_view_artist=0x7f0c0053;
-        public static final int image_view_track=0x7f0c0055;
-        public static final int input_artist_name=0x7f0c0050;
+        public static final int image_view_artist=0x7f0c0055;
+        public static final int image_view_track=0x7f0c0057;
+        public static final int input_artist_name=0x7f0c0051;
+        public static final int layout_view_artist_search_result=0x7f0c0050;
+        public static final int layout_view_track_search_result=0x7f0c0053;
         public static final int listMode=0x7f0c0009;
         public static final int list_item=0x7f0c002a;
-        public static final int list_view_artist_search_result=0x7f0c0051;
-        public static final int list_view_track_search_result=0x7f0c0052;
+        public static final int list_view_artist_search_result=0x7f0c0052;
+        public static final int list_view_track_search_result=0x7f0c0054;
         public static final int middle=0x7f0c0015;
         public static final int multiply=0x7f0c001e;
         public static final int never=0x7f0c0019;
@@ -1590,9 +1592,9 @@ containing a value of this type.
         public static final int submit_area=0x7f0c004b;
         public static final int tabMode=0x7f0c000b;
         public static final int textSpacerNoButtons=0x7f0c0033;
-        public static final int text_view_album_name=0x7f0c0057;
-        public static final int text_view_artist_name=0x7f0c0054;
-        public static final int text_view_track_name=0x7f0c0056;
+        public static final int text_view_album_name=0x7f0c0059;
+        public static final int text_view_artist_name=0x7f0c0056;
+        public static final int text_view_track_name=0x7f0c0058;
         public static final int title=0x7f0c002c;
         public static final int title_template=0x7f0c002f;
         public static final int topPanel=0x7f0c002e;
@@ -1644,8 +1646,7 @@ containing a value of this type.
         public static final int test=0x7f040022;
     }
     public static final class menu {
-        public static final int artistfragment=0x7f0d0000;
-        public static final int menu_main=0x7f0d0001;
+        public static final int menu_main=0x7f0d0000;
     }
     public static final class mipmap {
         public static final int ic_launcher=0x7f030000;
@@ -1674,22 +1675,24 @@ containing a value of this type.
         public static final int action_share=0x7f060014;
         public static final int app_name=0x7f060015;
         public static final int artist_no_result=0x7f060016;
-        public static final int hello_blank_fragment=0x7f060017;
-        public static final int hello_world=0x7f060018;
-        public static final int input_artist_name_message=0x7f060019;
-        public static final int pref_location_default=0x7f06001a;
-        public static final int pref_location_key=0x7f06001b;
-        public static final int pref_location_label=0x7f06001c;
-        public static final int pref_map_location_summ=0x7f06001d;
-        public static final int pref_map_location_sync=0x7f06001e;
-        public static final int pref_temp_unit_default=0x7f06001f;
-        public static final int pref_temp_unit_dialog_title=0x7f060020;
-        public static final int pref_temp_unit_key=0x7f060021;
-        public static final int pref_temp_unit_label=0x7f060022;
-        public static final int pref_units_imperial=0x7f060023;
-        public static final int pref_units_metric=0x7f060024;
-        public static final int title_activity_detail=0x7f060025;
-        public static final int title_activity_settings=0x7f060026;
+        public static final int artist_search_hint=0x7f060017;
+        public static final int hello_blank_fragment=0x7f060018;
+        public static final int hello_world=0x7f060019;
+        public static final int input_artist_name_message=0x7f06001a;
+        public static final int pref_location_default=0x7f06001b;
+        public static final int pref_location_key=0x7f06001c;
+        public static final int pref_location_label=0x7f06001d;
+        public static final int pref_map_location_summ=0x7f06001e;
+        public static final int pref_map_location_sync=0x7f06001f;
+        public static final int pref_temp_unit_default=0x7f060020;
+        public static final int pref_temp_unit_dialog_title=0x7f060021;
+        public static final int pref_temp_unit_key=0x7f060022;
+        public static final int pref_temp_unit_label=0x7f060023;
+        public static final int pref_units_imperial=0x7f060024;
+        public static final int pref_units_metric=0x7f060025;
+        public static final int text_top_tracks=0x7f060026;
+        public static final int title_activity_detail=0x7f060027;
+        public static final int title_activity_settings=0x7f060028;
     }
     public static final class style {
         public static final int AlertDialog_AppCompat=0x7f08006b;
