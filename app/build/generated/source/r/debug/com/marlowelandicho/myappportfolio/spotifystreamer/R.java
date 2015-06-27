@@ -1523,8 +1523,6 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f0c003d;
         public static final int action_mode_bar_stub=0x7f0c003c;
         public static final int action_mode_close_button=0x7f0c0025;
-        public static final int action_refresh=0x7f0c005b;
-        public static final int action_settings=0x7f0c005a;
         public static final int activity_chooser_view_content=0x7f0c0026;
         public static final int alertTitle=0x7f0c0030;
         public static final int always=0x7f0c0016;
@@ -1643,7 +1641,6 @@ containing a value of this type.
         public static final int select_dialog_multichoice_material=0x7f04001f;
         public static final int select_dialog_singlechoice_material=0x7f040020;
         public static final int support_simple_spinner_dropdown_item=0x7f040021;
-        public static final int test=0x7f040022;
     }
     public static final class menu {
         public static final int menu_main=0x7f0d0000;
@@ -1669,30 +1666,16 @@ containing a value of this type.
         public static final int abc_shareactionprovider_share_with=0x7f06000b;
         public static final int abc_shareactionprovider_share_with_application=0x7f06000c;
         public static final int abc_toolbar_collapse_description=0x7f060010;
-        public static final int action_map=0x7f060011;
-        public static final int action_refresh=0x7f060012;
-        public static final int action_settings=0x7f060013;
-        public static final int action_share=0x7f060014;
-        public static final int app_name=0x7f060015;
-        public static final int artist_no_result=0x7f060016;
-        public static final int artist_search_hint=0x7f060017;
-        public static final int hello_blank_fragment=0x7f060018;
-        public static final int hello_world=0x7f060019;
-        public static final int input_artist_name_message=0x7f06001a;
-        public static final int pref_location_default=0x7f06001b;
-        public static final int pref_location_key=0x7f06001c;
-        public static final int pref_location_label=0x7f06001d;
-        public static final int pref_map_location_summ=0x7f06001e;
-        public static final int pref_map_location_sync=0x7f06001f;
-        public static final int pref_temp_unit_default=0x7f060020;
-        public static final int pref_temp_unit_dialog_title=0x7f060021;
-        public static final int pref_temp_unit_key=0x7f060022;
-        public static final int pref_temp_unit_label=0x7f060023;
-        public static final int pref_units_imperial=0x7f060024;
-        public static final int pref_units_metric=0x7f060025;
-        public static final int text_top_tracks=0x7f060026;
-        public static final int title_activity_detail=0x7f060027;
-        public static final int title_activity_settings=0x7f060028;
+        public static final int app_name=0x7f060011;
+        public static final int artist_no_result=0x7f060012;
+        public static final int artist_search_hint=0x7f060013;
+        public static final int hint_album_name=0x7f060014;
+        public static final int hint_no_image=0x7f060015;
+        public static final int hint_track_name=0x7f060016;
+        public static final int input_artist_name_message=0x7f060017;
+        public static final int spotify_exception_message=0x7f060018;
+        public static final int text_top_tracks=0x7f060019;
+        public static final int track_no_result=0x7f06001a;
     }
     public static final class style {
         public static final int AlertDialog_AppCompat=0x7f08006b;

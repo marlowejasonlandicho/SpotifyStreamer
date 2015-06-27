@@ -5,9 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import kaaes.spotify.webapi.android.models.Artist;
-import kaaes.spotify.webapi.android.models.Track;
-
 /**
  * Created by marlowe.landicho on 27/6/15.
  */
@@ -15,23 +12,24 @@ import kaaes.spotify.webapi.android.models.Track;
 public class SpotifyStreamerResult {
 
     private static String queryString;
-    private static List<Artist> artists = new ArrayList<>();
-    private static Map<String, List<Track>> artistTopTracks = new HashMap<>();
+    private static int firstVisiblePosition;
+    private static List<SpotifyStreamerArtist> artists = new ArrayList<>();
+    private static final Map<String, List<SpotifyStreamerTrack>> artistTopTracks = new HashMap<>();
 
 
-    public static List<Artist> getArtists() {
+    public static List<SpotifyStreamerArtist> getArtists() {
         return artists;
     }
 
-    public static void setArtists(List<Artist> artists) {
+    public static void setArtists(List<SpotifyStreamerArtist> artists) {
         SpotifyStreamerResult.artists = artists;
     }
 
-    public static void addArtistTopTracks(String artistId, List<Track> tracks) {
+    public static void addArtistTopTracks(String artistId, List<SpotifyStreamerTrack> tracks) {
         artistTopTracks.put(artistId, tracks);
     }
 
-    public static List<Track> getArtistTopTracks(String artistId) {
+    public static List<SpotifyStreamerTrack> getArtistTopTracks(String artistId) {
         return artistTopTracks.get(artistId);
     }
 
@@ -45,5 +43,13 @@ public class SpotifyStreamerResult {
 
     public static void clearSearchArtistResults() {
         artists.clear();
+    }
+
+    public static int getFirstVisiblePosition() {
+        return firstVisiblePosition;
+    }
+
+    public static void setFirstVisiblePosition(int firstVisiblePosition) {
+        SpotifyStreamerResult.firstVisiblePosition = firstVisiblePosition;
     }
 }

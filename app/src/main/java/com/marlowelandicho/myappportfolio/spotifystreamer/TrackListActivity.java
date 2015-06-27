@@ -11,7 +11,6 @@ public class TrackListActivity extends ActionBarActivity {
     private static final String LOG_TAG = TrackListActivity.class.getSimpleName();
     private static final String TRACKLIST_ACTIVITY_FRAGMENT = "TAFTAG";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,35 +24,12 @@ public class TrackListActivity extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Homeq/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-//        if (id == R.id.action_settings) {
-//            Intent intent = new Intent(this, SettingsActivity.class);
-//            startActivity(intent);
-//            return true;
-//        }
-
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        TrackListActivityFragment trackListActivityFragment = (TrackListActivityFragment) getSupportFragmentManager().findFragmentByTag(TRACKLIST_ACTIVITY_FRAGMENT);
-        if (trackListActivityFragment != null) {
-//            trackListActivityFragment.;
-        }
-//        mLocation = location;
-    }
 }

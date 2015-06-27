@@ -9,12 +9,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.marlowelandicho.myappportfolio.spotifystreamer.data.SpotifyStreamerArtist;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
-
-import kaaes.spotify.webapi.android.models.Artist;
-import kaaes.spotify.webapi.android.models.Image;
 
 /**
  * Created by marlowe.landicho on 24/6/15.
@@ -24,10 +22,10 @@ public class ArtistAdapter extends BaseAdapter {
     private final String LOG_TAG = ArtistAdapter.class.getSimpleName();
 
 
-    Context context;
-    List<Artist> artistList;
+    private final Context context;
+    private final List<SpotifyStreamerArtist> artistList;
 
-    public ArtistAdapter(Context context, List<Artist> artistList) {
+    public ArtistAdapter(Context context, List<SpotifyStreamerArtist> artistList) {
         this.context = context;
         this.artistList = artistList;
     }
@@ -38,12 +36,12 @@ public class ArtistAdapter extends BaseAdapter {
     }
 
     public View getView(int position, View artistView, ViewGroup parent) {
-        ArtistViewHolder artistViewHolder = null;
+        ArtistViewHolder artistViewHolder;
 
         LayoutInflater mInflater = (LayoutInflater)
                 context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
 
-        Artist artist = (Artist) getItem(position);
+        SpotifyStreamerArtist artist = (SpotifyStreamerArtist) getItem(position);
 
         if (artistView == null) {
             artistView = mInflater.inflate(R.layout.list_item_individual_artist_search, parent, false);
@@ -55,18 +53,15 @@ public class ArtistAdapter extends BaseAdapter {
             artistViewHolder = (ArtistViewHolder) artistView.getTag();
         }
 
-        for (Image image : artist.images) {
-            if (image.height <= 64 && image.url != null) {
-                Picasso.with(context)
-                        .load(image.url)
-                        .resize(50, 50)
-                        .centerCrop()
-                        .into(artistViewHolder.artistImageView);
-                break;
-            }
-        }
+        if (artist.getThumbnailUrl() != null) {
+            Picasso.with(context)
+                    .load(artist.getThumbnailUrl())
+                    .resize(50, 50)
+                    .centerCrop()
+                    .into(artistViewHolder.artistImageView);
 
-        artistViewHolder.txtViewArtistName.setText(artist.name);
+        }
+        artistViewHolder.txtViewArtistName.setText(artist.getArtistName());
 
         return artistView;
     }
@@ -87,12 +82,11 @@ public class ArtistAdapter extends BaseAdapter {
         return artistList.indexOf(getItem(position));
     }
 
-
     public void clear() {
         artistList.clear();
     }
 
-    public void add(Artist artist) {
+    public void add(SpotifyStreamerArtist artist) {
         artistList.add(artist);
     }
 }

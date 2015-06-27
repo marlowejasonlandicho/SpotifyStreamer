@@ -9,12 +9,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.marlowelandicho.myappportfolio.spotifystreamer.data.SpotifyStreamerTrack;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
-
-import kaaes.spotify.webapi.android.models.Image;
-import kaaes.spotify.webapi.android.models.Track;
 
 /**
  * Created by marlowe.landicho on 24/6/15.
@@ -22,16 +20,13 @@ import kaaes.spotify.webapi.android.models.Track;
 public class TopTrackAdapter extends BaseAdapter {
 
     private final String LOG_TAG = TopTrackAdapter.class.getSimpleName();
+    private final Context context;
+    private final List<SpotifyStreamerTrack> trackList;
 
-
-    Context context;
-    List<Track> trackList;
-
-    public TopTrackAdapter(Context context, List<Track> trackList) {
+    public TopTrackAdapter(Context context, List<SpotifyStreamerTrack> trackList) {
         this.context = context;
         this.trackList = trackList;
     }
-
 
     private class TrackViewHolder {
         ImageView albumImageView;
@@ -45,7 +40,7 @@ public class TopTrackAdapter extends BaseAdapter {
         LayoutInflater mInflater = (LayoutInflater)
                 context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
 
-        Track track = (Track) getItem(position);
+        SpotifyStreamerTrack track = (SpotifyStreamerTrack) getItem(position);
 
         if (topTrackView == null) {
             topTrackView = mInflater.inflate(R.layout.list_item_individual_track_search, parent, false);
@@ -58,19 +53,16 @@ public class TopTrackAdapter extends BaseAdapter {
             trackViewHolder = (TrackViewHolder) topTrackView.getTag();
         }
 
-        for (Image image : track.album.images) {
-            if (image.height <= 64 && image.url != null) {
-                Picasso.with(context)
-                        .load(image.url)
-                        .resize(50, 50)
-                        .centerCrop()
-                        .into(trackViewHolder.albumImageView);
-                break;
-            }
-        }
+        if (track.getThumbnailUrl() != null) {
+            Picasso.with(context)
+                    .load(track.getThumbnailUrl())
+                    .resize(50, 50)
+                    .centerCrop()
+                    .into(trackViewHolder.albumImageView);
 
-        trackViewHolder.txtViewTrackName.setText(track.name);
-        trackViewHolder.txtViewAlbumName.setText(track.album.name);
+        }
+        trackViewHolder.txtViewTrackName.setText(track.getArtistName());
+        trackViewHolder.txtViewAlbumName.setText(track.getAlbumName());
 
         return topTrackView;
     }
@@ -91,12 +83,11 @@ public class TopTrackAdapter extends BaseAdapter {
         return trackList.indexOf(getItem(position));
     }
 
-
     public void clear() {
         trackList.clear();
     }
 
-    public void add(Track track) {
+    public void add(SpotifyStreamerTrack track) {
         trackList.add(track);
     }
 }
