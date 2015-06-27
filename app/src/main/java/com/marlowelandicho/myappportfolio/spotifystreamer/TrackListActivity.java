@@ -9,8 +9,7 @@ import android.view.MenuItem;
 public class TrackListActivity extends ActionBarActivity {
 
     private static final String LOG_TAG = TrackListActivity.class.getSimpleName();
-    private static final String FORECAST_SHARE_HASHTAG = " #SunshineApp";
-    private String mForecastStr;
+    private static final String TRACKLIST_ACTIVITY_FRAGMENT = "TAFTAG";
 
 
     @Override
@@ -27,14 +26,14 @@ public class TrackListActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+//        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
+        // automatically handle clicks on the Homeq/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
@@ -47,4 +46,14 @@ public class TrackListActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        TrackListActivityFragment trackListActivityFragment = (TrackListActivityFragment) getSupportFragmentManager().findFragmentByTag(TRACKLIST_ACTIVITY_FRAGMENT);
+        if (trackListActivityFragment != null) {
+//            trackListActivityFragment.;
+        }
+//        mLocation = location;
+    }
 }

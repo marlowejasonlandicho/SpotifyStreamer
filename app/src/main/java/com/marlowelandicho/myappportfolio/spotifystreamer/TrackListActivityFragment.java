@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.marlowelandicho.myappportfolio.spotifystreamer.data.SpotifyStreamerResult;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,6 +34,7 @@ public class TrackListActivityFragment extends Fragment {
     private TopTrackAdapter topTrackAdapter;
     private List<Track> topTrackResultList = new ArrayList<>();
     private static final Map<String, Object> paramMap = new HashMap<>();
+    String artistId;
 
     private static final String LOG_TAG = TrackListActivityFragment.class.getSimpleName();
 
@@ -43,19 +46,26 @@ public class TrackListActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_track_search, container, false);
+        List<Track> localTrackList = null;
 
         paramMap.put("country", Locale.getDefault().getCountry());
-
+        Intent trackListActivityIntent = getActivity().getIntent();
+        if (trackListActivityIntent != null && trackListActivityIntent.hasExtra(Intent.EXTRA_TEXT)) {
+            artistId = trackListActivityIntent.getStringExtra(Intent.EXTRA_TEXT);
+            localTrackList = SpotifyStreamerResult.getArtistTopTracks(artistId);
+            if (localTrackList != null && localTrackList.size() > 0) {
+                topTrackResultList.addAll(SpotifyStreamerResult.getArtistTopTracks(artistId));
+            }
+        }
 
         ListView listView = (ListView) rootView.findViewById(R.id.list_view_track_search_result);
         topTrackAdapter = new TopTrackAdapter(getActivity().getApplicationContext(), topTrackResultList);
         listView.setAdapter(topTrackAdapter);
 
-        Intent trackListActivityIntent = getActivity().getIntent();
-        if (trackListActivityIntent != null && trackListActivityIntent.hasExtra(Intent.EXTRA_TEXT)) {
-            String artistId = trackListActivityIntent.getStringExtra(Intent.EXTRA_TEXT);
+        if (localTrackList == null || localTrackList.size() == 0) {
             updateTopTrackResult(artistId);
         }
+
         return rootView;
     }
 
@@ -76,6 +86,18 @@ public class TrackListActivityFragment extends Fragment {
         SearchTopTrackTask searchTopTrackTask = new SearchTopTrackTask();
         searchTopTrackTask.execute(artistIdParam);
     }
+
+    public void onPause() {
+        super.onPause();
+        SpotifyStreamerResult.addArtistTopTracks(artistId, topTrackResultList);
+    }
+
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+////        q = SpotifyStreamerResult.getQueryString();
+//        topTrackResultList.addAll(SpotifyStreamerResult.getArtistTopTracks(artistId));
+//    }
 
     public class SearchTopTrackTask extends AsyncTask<String, Void, List<Track>> {
 
@@ -112,6 +134,7 @@ public class TrackListActivityFragment extends Fragment {
 
             Tracks topTracks = spotifyService.getArtistTopTrack(artistIdParam, paramMap);
             List<Track> topTracksList = topTracks.tracks;
+            topTrackResultList = topTracksList;
 
 //            List<Track> topTracksList = new ArrayList<Track>();
 //            Track track = new Track();

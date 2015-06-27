@@ -1544,7 +1544,6 @@ containing a value of this type.
         public static final int end=0x7f0c0014;
         public static final int expand_activities_button=0x7f0c0027;
         public static final int expanded_menu=0x7f0c0037;
-        public static final int fragment=0x7f0c004f;
         public static final int home=0x7f0c0004;
         public static final int homeAsUp=0x7f0c000d;
         public static final int icon=0x7f0c002b;
@@ -1586,6 +1585,7 @@ containing a value of this type.
         public static final int showHome=0x7f0c0010;
         public static final int showTitle=0x7f0c0011;
         public static final int split_action_bar=0x7f0c0007;
+        public static final int spotify_streamer_main=0x7f0c004f;
         public static final int src_atop=0x7f0c0020;
         public static final int src_in=0x7f0c0021;
         public static final int src_over=0x7f0c0022;

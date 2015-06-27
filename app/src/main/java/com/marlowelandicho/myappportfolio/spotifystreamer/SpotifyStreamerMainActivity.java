@@ -1,18 +1,26 @@
 package com.marlowelandicho.myappportfolio.spotifystreamer;
 
-import android.os.PersistableBundle;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 
 public class SpotifyStreamerMainActivity extends ActionBarActivity {
 
+    private String SEARCH_ARTIST_FRAGMENT = "SAFTAG";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.spotify_streamer_main, new SearchArtistFragment(), SEARCH_ARTIST_FRAGMENT)
+                    .commit();
+        }
+
     }
 
 
@@ -39,17 +47,27 @@ public class SpotifyStreamerMainActivity extends ActionBarActivity {
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        SearchArtistFragment searchArtistFragment = (SearchArtistFragment) getSupportFragmentManager().findFragmentByTag(SEARCH_ARTIST_FRAGMENT);
+        if (searchArtistFragment != null) {
+//            SpotifyStreamerResult.getArtists().addAll(searchArtistFragment.getSearchArtistResultList());
+//        EditText editText = (EditText) findViewById(R.id.input_artist_name);
+//        q = editText.getText().toString();
+        }
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
+//        EditText editText = (EditText) findViewById(R.id.input_artist_name);
+//        q = editText.getText().toString();
+        SearchArtistFragment searchArtistFragment = (SearchArtistFragment) getSupportFragmentManager().findFragmentByTag(SEARCH_ARTIST_FRAGMENT);
+        if (searchArtistFragment != null) {
+//            searchArtistFragment.updateArtistResult(q);
+//            searchArtistFragment.setSearchArtistResultList(SpotifyStreamerResult.getArtists());
+        }
+//        mLocation = location;
     }
 
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-        super.onSaveInstanceState(outState, outPersistentState);
-    }
 }

@@ -18,6 +18,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.marlowelandicho.myappportfolio.spotifystreamer.data.SpotifyStreamerResult;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +49,7 @@ public class SearchArtistFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_main, menu);
+//        inflater.inflate(R.menu.menu_main, menu);
     }
 
     @Override
@@ -56,12 +58,17 @@ public class SearchArtistFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_artist_search, container, false);
 
         EditText inputArtistNameTextView = (EditText) rootView.findViewById(R.id.input_artist_name);
+        String localQ = SpotifyStreamerResult.getQueryString();
+        if (localQ != null) {
+            inputArtistNameTextView.setText(localQ);
+        }
         inputArtistNameTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     q = v.getText().toString();
                     if (q != null && q.length() > 0) {
+                        SpotifyStreamerResult.clearSearchArtistResults();
                         updateArtistResult(q);
                         return false;
                     }
@@ -79,10 +86,6 @@ public class SearchArtistFragment extends Fragment {
                 Artist selectedArtist = (Artist) parent.getItemAtPosition(position);
                 Intent trackListActivityIntent = new Intent(getActivity(), TrackListActivity.class).putExtra(Intent.EXTRA_TEXT, selectedArtist.id);
                 startActivity(trackListActivityIntent);
-
-//                int duration = Toast.LENGTH_SHORT;
-//                Toast toast = Toast.makeText(getActivity().getApplicationContext(), selectedArtist.name, duration);
-//                toast.show();
             }
         });
 
@@ -94,7 +97,7 @@ public class SearchArtistFragment extends Fragment {
         super.onStart();
     }
 
-    private void updateArtistResult(String q) {
+    public void updateArtistResult(String q) {
         SearchArtistTask searchArtistTask = new SearchArtistTask();
         searchArtistTask.execute(q);
     }
@@ -102,22 +105,21 @@ public class SearchArtistFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
-//        if (id == R.id.action_refresh) {
-//            updateArtistResult();
-//            return true;
-//        }
-
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        SpotifyStreamerResult.setQueryString(q);
+        SpotifyStreamerResult.getArtists().addAll(searchArtistResultList);
+    }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (q != null && q.length() > 0) {
-            updateArtistResult(q);
-        }
+        q = SpotifyStreamerResult.getQueryString();
+        searchArtistResultList.addAll(SpotifyStreamerResult.getArtists());
     }
 
 
@@ -146,16 +148,20 @@ public class SearchArtistFragment extends Fragment {
 
         @Override
         protected List<Artist> doInBackground(String... params) {
-            if (params.length == 0) {
-                return null;
+            if (params == null) {
+                return searchArtistResultList;
             }
             String artistQuery = params[0];
 
+            if (artistQuery == null || artistQuery.length() == 0) {
+                return searchArtistResultList;
+            }
             SpotifyApi api = new SpotifyApi();
             SpotifyService spotifyService = api.getService();
 
             ArtistsPager artistsPager = spotifyService.searchArtists(artistQuery);
             List<Artist> artistList = artistsPager.artists.items;
+            searchArtistResultList = artistList;
 
 //            List<Artist> artistList = new ArrayList<>();
 //            Artist artist = new Artist();
