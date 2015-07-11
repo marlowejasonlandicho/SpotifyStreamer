@@ -25,7 +25,8 @@
         android:layout_toRightOf="@+id/image_view_track"
         android:gravity="bottom"
         android:minHeight="?android:attr/listPreferredItemHeight"
-        android:text="@string/hint_track_name" />
+        android:text="@string/hint_track_name"
+        android:textColor="#a5000000" />
 
     <TextView
         android:id="@+id/text_view_album_name"
@@ -35,7 +36,8 @@
         android:layout_marginLeft="10dp"
         android:layout_toRightOf="@+id/image_view_track"
         android:gravity="top"
-        android:text="@string/hint_album_name" />
+        android:text="@string/hint_album_name"
+        android:textColor="#a5000000" />
 
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"

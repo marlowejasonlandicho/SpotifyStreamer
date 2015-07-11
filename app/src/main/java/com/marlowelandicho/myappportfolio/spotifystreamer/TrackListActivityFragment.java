@@ -1,6 +1,6 @@
 package com.marlowelandicho.myappportfolio.spotifystreamer;
 
-import android.content.Intent;
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -37,9 +38,16 @@ public class TrackListActivityFragment extends Fragment {
     private TopTrackAdapter topTrackAdapter;
     private List<SpotifyStreamerTrack> topTrackResultList = new ArrayList<>();
     private static final Map<String, Object> paramMap = new HashMap<>();
-    String artistId;
-
+    private String artistId;
+    private SpotifyStreamerResult spotifyStreamerResult;
     private static final String LOG_TAG = TrackListActivityFragment.class.getSimpleName();
+
+    OnPopulateResultListener mCallback;
+
+
+    public interface OnPopulateResultListener {
+        public void onPopulateResult(SpotifyStreamerResult spotifyStreamerResult);
+    }
 
     public TrackListActivityFragment() {
         setHasOptionsMenu(true);
@@ -52,40 +60,67 @@ public class TrackListActivityFragment extends Fragment {
         List<SpotifyStreamerTrack> localTrackList = null;
 
         paramMap.put("country", Locale.getDefault().getCountry());
-        Intent trackListActivityIntent = getActivity().getIntent();
-        if (trackListActivityIntent != null && trackListActivityIntent.hasExtra(Intent.EXTRA_TEXT)) {
-            artistId = trackListActivityIntent.getStringExtra(Intent.EXTRA_TEXT);
-            localTrackList = SpotifyStreamerResult.getArtistTopTracks(artistId);
+        spotifyStreamerResult = (SpotifyStreamerResult) getArguments().getParcelable("com.marlowelandicho.myappportfolio.spotifystreamer.SpotifyStreamerResult");
+
+        if (spotifyStreamerResult != null) {
+            artistId = spotifyStreamerResult.getArtistId();
+            localTrackList = spotifyStreamerResult.getArtistTopTracks(artistId);
             if (localTrackList != null && localTrackList.size() > 0) {
-                topTrackResultList.addAll(SpotifyStreamerResult.getArtistTopTracks(artistId));
+                topTrackResultList.addAll(spotifyStreamerResult.getArtistTopTracks(artistId));
             }
         }
 
         ListView listView = (ListView) rootView.findViewById(R.id.list_view_track_search_result);
-        topTrackAdapter = new TopTrackAdapter(getActivity().getApplicationContext(), topTrackResultList);
+        topTrackAdapter = new TopTrackAdapter(getActivity(), topTrackResultList);
         listView.setAdapter(topTrackAdapter);
 
         if (localTrackList == null || localTrackList.size() == 0) {
             updateTopTrackResult(artistId);
         }
-
         return rootView;
     }
-
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_main, menu);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            mCallback.onPopulateResult(spotifyStreamerResult);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private void updateTopTrackResult(String artistIdParam) {
         SearchTopTrackTask searchTopTrackTask = new SearchTopTrackTask();
         searchTopTrackTask.execute(artistIdParam);
+
+//        for (int i = 0; i <= 10; i++) {
+//            SpotifyStreamerTrack spotifyStreamerTrack = new SpotifyStreamerTrack();
+//            spotifyStreamerTrack.setArtistId("1" + i);
+//            spotifyStreamerTrack.setArtistName("A" + i);
+//            spotifyStreamerTrack.setAlbumName("B" + i);
+//            topTrackResultList.add(spotifyStreamerTrack);
+//        }
     }
 
     public void onPause() {
+
         super.onPause();
-        SpotifyStreamerResult.addArtistTopTracks(artistId, topTrackResultList);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            mCallback = (OnPopulateResultListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnPopulateResultListener");
+        }
     }
 
     public class SearchTopTrackTask extends AsyncTask<String, Void, List<SpotifyStreamerTrack>> {
@@ -107,6 +142,8 @@ public class TrackListActivityFragment extends Fragment {
                     topTrackAdapter.add(topTrackResult);
                 }
             }
+            spotifyStreamerResult.addArtistTopTracks(artistId, topTrackResultList);
+
             topTrackAdapter.notifyDataSetChanged();
 
         }

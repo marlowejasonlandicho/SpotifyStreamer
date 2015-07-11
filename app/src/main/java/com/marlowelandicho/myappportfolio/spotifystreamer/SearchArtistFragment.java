@@ -1,6 +1,6 @@
 package com.marlowelandicho.myappportfolio.spotifystreamer;
 
-import android.content.Intent;
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -37,16 +37,40 @@ public class SearchArtistFragment extends Fragment {
 
     private ArtistAdapter artistAdapter;
     private List<SpotifyStreamerArtist> searchArtistResultList = new ArrayList<>();
+    private SpotifyStreamerResult spotifyStreamerResult;
     private String q;
+    private int REQUEST_CODE = 10;
+//    private Activity hostActivity;
+
+    OnPopulateResultListener mCallback;
 
     public SearchArtistFragment() {
+    }
+
+    public interface OnPopulateResultListener {
+        public void onPopulateResult(SpotifyStreamerResult spotifyStreamerResult);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        spotifyStreamerResult = (SpotifyStreamerResult) getArguments()
+                .get("com.marlowelandicho.myappportfolio.spotifystreamer.SpotifyStreamerResult");
+
+        if (savedInstanceState != null && spotifyStreamerResult == null) {
+
+        }
         setHasOptionsMenu(true);
     }
+
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE) {
+//            spotifyStreamerResult = (SpotifyStreamerResult) data.getExtras().get("com.marlowelandicho.myappportfolio.spotifystreamer.SpotifyStreamerResult");
+//        }
+//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,8 +78,8 @@ public class SearchArtistFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_artist_search, container, false);
         ListView listView = (ListView) rootView.findViewById(R.id.list_view_artist_search_result);
         EditText inputArtistNameTextView = (EditText) rootView.findViewById(R.id.input_artist_name);
+        String localQ = spotifyStreamerResult.getQueryString();
 
-        String localQ = SpotifyStreamerResult.getQueryString();
         if (localQ != null) {
             inputArtistNameTextView.setText(localQ);
         } else {
@@ -68,10 +92,10 @@ public class SearchArtistFragment extends Fragment {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     ListView listView = (ListView) getActivity().findViewById(R.id.list_view_artist_search_result);
                     listView.setSelection(0);
-                    
+
                     q = v.getText().toString();
                     if (q != null && q.length() > 0) {
-                        SpotifyStreamerResult.clearSearchArtistResults();
+                        spotifyStreamerResult.clearSearchArtistResults();
                         updateArtistResult(q);
                         return false;
                     }
@@ -86,9 +110,15 @@ public class SearchArtistFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 SpotifyStreamerArtist selectedArtist = (SpotifyStreamerArtist) parent.getItemAtPosition(position);
-                Intent trackListActivityIntent =
-                        new Intent(getActivity(), TrackListActivity.class).putExtra(Intent.EXTRA_TEXT, selectedArtist.getArtistId());
-                startActivity(trackListActivityIntent);
+
+                spotifyStreamerResult.setArtistId(selectedArtist.getArtistId());
+                spotifyStreamerResult.setQueryString(q);
+                spotifyStreamerResult.clearSearchArtistResults();
+                spotifyStreamerResult.getArtists().addAll(searchArtistResultList);
+
+                mCallback.onPopulateResult(spotifyStreamerResult);
+
+
             }
         });
 
@@ -98,7 +128,14 @@ public class SearchArtistFragment extends Fragment {
     public void updateArtistResult(String q) {
         SearchArtistTask searchArtistTask = new SearchArtistTask();
         searchArtistTask.execute(q);
+//        for (int i = 0; i <= 10; i++) {
+//            SpotifyStreamerArtist spotifyStreamerArtist = new SpotifyStreamerArtist();
+//            spotifyStreamerArtist.setArtistId("A" + i);
+//            spotifyStreamerArtist.setArtistName("B" + i);
+//            searchArtistResultList.add(spotifyStreamerArtist);
+//        }
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -111,24 +148,37 @@ public class SearchArtistFragment extends Fragment {
 
         ListView listView = (ListView) getActivity().findViewById(R.id.list_view_artist_search_result);
         int firstVisiblePosition = listView.getFirstVisiblePosition();
-        SpotifyStreamerResult.setFirstVisiblePosition(firstVisiblePosition);
-        SpotifyStreamerResult.setQueryString(q);
-        SpotifyStreamerResult.getArtists().addAll(searchArtistResultList);
+        spotifyStreamerResult.setFirstVisiblePosition(new Integer(firstVisiblePosition));
+//        spotifyStreamerResult.setQueryString(q);
+        spotifyStreamerResult.getArtists().clear();
+        spotifyStreamerResult.getArtists().addAll(searchArtistResultList);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        q = SpotifyStreamerResult.getQueryString();
+        q = spotifyStreamerResult.getQueryString();
         ListView listView = (ListView) getActivity().findViewById(R.id.list_view_artist_search_result);
-        listView.setSelection(SpotifyStreamerResult.getFirstVisiblePosition());
+        listView.setSelection(spotifyStreamerResult.getFirstVisiblePosition());
         listView.requestFocus();
+
         searchArtistResultList.clear();
-        searchArtistResultList.addAll(SpotifyStreamerResult.getArtists());
+
+        searchArtistResultList.addAll(spotifyStreamerResult.getArtists());
         artistAdapter.notifyDataSetChanged();
 
     }
 
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            mCallback = (OnPopulateResultListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnPopulateResultListener");
+        }
+    }
 
     public class SearchArtistTask extends AsyncTask<String, Void, List<SpotifyStreamerArtist>> {
 

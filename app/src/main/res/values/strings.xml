@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Spotify Streamer</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="artist_no_result">No Artist found on your criteria. Please refine your search.</string>
     <string name="track_no_result">No Tracks and Album found for the artist. Please try other artists.</string>
     <string name="artist_search_hint">Artist name goes here…</string>
