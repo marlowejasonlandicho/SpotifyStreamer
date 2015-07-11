@@ -35,7 +35,7 @@ public class SpotifyStreamerMainActivity extends AppCompatActivity implements Se
             bundle.putParcelable("com.marlowelandicho.myappportfolio.spotifystreamer.SpotifyStreamerResult", spotifyStreamerResult);
             searchArtistFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.spotify_streamer_main, searchArtistFragment).addToBackStack(null)
+                    .replace(R.id.spotify_streamer_main, searchArtistFragment, SEARCH_ARTIST_FRAGMENT).addToBackStack(null)
                     .commit();
         } else {
             spotifyStreamerResult = savedInstanceState.getParcelable("com.marlowelandicho.myappportfolio.spotifystreamer.SpotifyStreamerResult");
@@ -74,8 +74,15 @@ public class SpotifyStreamerMainActivity extends AppCompatActivity implements Se
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE) {
             Bundle bundle = data.getExtras();
-            spotifyStreamerResult = bundle.getParcelable("com.marlowelandicho.myappportfolio.spotifystreamer.SpotifyStreamerResult");
-//            spotifyStreamerResult = (SpotifyStreamerResult) data.getExtras().get("com.marlowelandicho.myappportfolio.spotifystreamer.SpotifyStreamerResult");
+//            spotifyStreamerResult = bundle.getParcelable("com.marlowelandicho.myappportfolio.spotifystreamer.SpotifyStreamerResult");
+//            getSupportFragmentManager().findFragmentByTag(SEARCH_ARTIST_FRAGMENT).getArguments()
+//                    .putParcelable("com.marlowelandicho.myappportfolio.spotifystreamer.SpotifyStreamerResult", spotifyStreamerResult);
+
+            SearchArtistFragment searchArtistFragment = new SearchArtistFragment();
+            searchArtistFragment.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.spotify_streamer_main, searchArtistFragment, SEARCH_ARTIST_FRAGMENT).addToBackStack(null)
+                    .commit();
         }
     }
 

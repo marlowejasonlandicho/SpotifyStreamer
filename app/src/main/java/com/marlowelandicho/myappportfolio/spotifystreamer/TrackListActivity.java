@@ -29,7 +29,7 @@ public class TrackListActivity extends AppCompatActivity implements TrackListAct
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.layout_view_track_search_result, trackListActivityFragment)
+                    .replace(R.id.layout_view_track_search_result, trackListActivityFragment, TRACKLIST_ACTIVITY_FRAGMENT)
                     .addToBackStack(null)
                     .commit();
         }
@@ -53,7 +53,7 @@ public class TrackListActivity extends AppCompatActivity implements TrackListAct
         Bundle bundle = new Bundle();
         bundle.putParcelable("com.marlowelandicho.myappportfolio.spotifystreamer.SpotifyStreamerResult", spotifyStreamerResult);
         intent.putExtras(bundle);
-        
+
 //        intent.putExtra("com.marlowelandicho.myappportfolio.spotifystreamer.SpotifyStreamerResult", spotifyStreamerResult);
         setResult(Activity.RESULT_OK, intent);
         finish();
