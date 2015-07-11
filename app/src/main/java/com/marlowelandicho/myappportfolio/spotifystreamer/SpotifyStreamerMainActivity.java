@@ -74,15 +74,15 @@ public class SpotifyStreamerMainActivity extends AppCompatActivity implements Se
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE) {
             Bundle bundle = data.getExtras();
-//            spotifyStreamerResult = bundle.getParcelable("com.marlowelandicho.myappportfolio.spotifystreamer.SpotifyStreamerResult");
+            this.spotifyStreamerResult = bundle.getParcelable("com.marlowelandicho.myappportfolio.spotifystreamer.SpotifyStreamerResult");
 //            getSupportFragmentManager().findFragmentByTag(SEARCH_ARTIST_FRAGMENT).getArguments()
 //                    .putParcelable("com.marlowelandicho.myappportfolio.spotifystreamer.SpotifyStreamerResult", spotifyStreamerResult);
 
-            SearchArtistFragment searchArtistFragment = new SearchArtistFragment();
-            searchArtistFragment.setArguments(bundle);
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.spotify_streamer_main, searchArtistFragment, SEARCH_ARTIST_FRAGMENT).addToBackStack(null)
-                    .commit();
+//            SearchArtistFragment searchArtistFragment = new SearchArtistFragment();
+//            searchArtistFragment.setArguments(bundle);
+//            getSupportFragmentManager().beginTransaction()
+//                    .replace(R.id.spotify_streamer_main, searchArtistFragment, SEARCH_ARTIST_FRAGMENT).addToBackStack(null)
+//                    .commit();
         }
     }
 
@@ -90,6 +90,11 @@ public class SpotifyStreamerMainActivity extends AppCompatActivity implements Se
     public void onPopulateResult(SpotifyStreamerResult spotifyStreamerResult) {
         Intent trackListActivityIntent =
                 new Intent(this, TrackListActivity.class);
+//        this.spotifyStreamerResult.addArtistTopTracks(spotifyStreamerResult.getArtistId(), spotifyStreamerResult.getArtistTopTracks(spotifyStreamerResult.getArtistId()));
+//        this.spotifyStreamerResult = spotifyStreamerResult;
+        spotifyStreamerResult.addArtistTopTracks(
+                this.spotifyStreamerResult.getArtistId(),
+                this.spotifyStreamerResult.getArtistTopTracks(this.spotifyStreamerResult.getArtistId()));
 
         Bundle bundle = new Bundle();
         bundle.putParcelable("com.marlowelandicho.myappportfolio.spotifystreamer.SpotifyStreamerResult", spotifyStreamerResult);
