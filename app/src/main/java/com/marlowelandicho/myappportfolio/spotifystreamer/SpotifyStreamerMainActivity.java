@@ -15,9 +15,7 @@ public class SpotifyStreamerMainActivity extends AppCompatActivity implements Se
 
     private final String SEARCH_ARTIST_FRAGMENT = "SAFTAG";
     private final String LOG_TAG = SpotifyStreamerMainActivity.class.getSimpleName();
-    private Bundle bundle;
     private int REQUEST_CODE = 10;
-    //    private SpotifyStreamerResult spotifyStreamerResult = new SpotifyStreamerResult();
     private SpotifyStreamerResult spotifyStreamerResult;
 
 
@@ -53,21 +51,21 @@ public class SpotifyStreamerMainActivity extends AppCompatActivity implements Se
         return super.onOptionsItemSelected(item);
     }
 
-//    @Override
-//    protected void onSaveInstanceState(Bundle outState) {
-//        super.onSaveInstanceState(outState);
-//        outState.putParcelable("com.marlowelandicho.myappportfolio.spotifystreamer.SpotifyStreamerResult", spotifyStreamerResult);
-//    }
-//
-//    @Override
-//    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-//        super.onRestoreInstanceState(savedInstanceState);
-//        SpotifyStreamerResult savedSpotifyStreamerResult = (SpotifyStreamerResult) savedInstanceState.getParcelable("com.marlowelandicho.myappportfolio.spotifystreamer.SpotifyStreamerResult");
-//        if (savedSpotifyStreamerResult != null) {
-//            spotifyStreamerResult = savedSpotifyStreamerResult;
-//
-//        }
-//    }
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable("com.marlowelandicho.myappportfolio.spotifystreamer.SpotifyStreamerResult", spotifyStreamerResult);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        SpotifyStreamerResult savedSpotifyStreamerResult = (SpotifyStreamerResult) savedInstanceState.getParcelable("com.marlowelandicho.myappportfolio.spotifystreamer.SpotifyStreamerResult");
+        if (savedSpotifyStreamerResult != null) {
+            spotifyStreamerResult = savedSpotifyStreamerResult;
+
+        }
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -75,14 +73,6 @@ public class SpotifyStreamerMainActivity extends AppCompatActivity implements Se
         if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE) {
             Bundle bundle = data.getExtras();
             this.spotifyStreamerResult = bundle.getParcelable("com.marlowelandicho.myappportfolio.spotifystreamer.SpotifyStreamerResult");
-//            getSupportFragmentManager().findFragmentByTag(SEARCH_ARTIST_FRAGMENT).getArguments()
-//                    .putParcelable("com.marlowelandicho.myappportfolio.spotifystreamer.SpotifyStreamerResult", spotifyStreamerResult);
-
-//            SearchArtistFragment searchArtistFragment = new SearchArtistFragment();
-//            searchArtistFragment.setArguments(bundle);
-//            getSupportFragmentManager().beginTransaction()
-//                    .replace(R.id.spotify_streamer_main, searchArtistFragment, SEARCH_ARTIST_FRAGMENT).addToBackStack(null)
-//                    .commit();
         }
     }
 
@@ -90,8 +80,6 @@ public class SpotifyStreamerMainActivity extends AppCompatActivity implements Se
     public void onPopulateResult(SpotifyStreamerResult spotifyStreamerResult) {
         Intent trackListActivityIntent =
                 new Intent(this, TrackListActivity.class);
-//        this.spotifyStreamerResult.addArtistTopTracks(spotifyStreamerResult.getArtistId(), spotifyStreamerResult.getArtistTopTracks(spotifyStreamerResult.getArtistId()));
-//        this.spotifyStreamerResult = spotifyStreamerResult;
         spotifyStreamerResult.addArtistTopTracks(
                 this.spotifyStreamerResult.getArtistId(),
                 this.spotifyStreamerResult.getArtistTopTracks(this.spotifyStreamerResult.getArtistId()));

@@ -39,8 +39,6 @@ public class SearchArtistFragment extends Fragment {
     private List<SpotifyStreamerArtist> searchArtistResultList = new ArrayList<>();
     private SpotifyStreamerResult spotifyStreamerResult;
     private String q;
-    private int REQUEST_CODE = 10;
-//    private Activity hostActivity;
 
     OnPopulateResultListener mCallback;
 
@@ -64,13 +62,6 @@ public class SearchArtistFragment extends Fragment {
         setHasOptionsMenu(true);
     }
 
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE) {
-//            spotifyStreamerResult = (SpotifyStreamerResult) data.getExtras().get("com.marlowelandicho.myappportfolio.spotifystreamer.SpotifyStreamerResult");
-//        }
-//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
