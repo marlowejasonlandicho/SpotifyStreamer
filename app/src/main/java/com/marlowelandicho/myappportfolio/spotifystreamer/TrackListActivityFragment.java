@@ -47,7 +47,7 @@ public class TrackListActivityFragment extends Fragment {
     public interface TrackListListener {
         public void populateResult(SpotifyStreamerResult spotifyStreamerResult);
 
-        public void playTrack(SpotifyStreamerTrack spotifyStreamerTrack);
+        public void openSimplePlayer(SpotifyStreamerTrack spotifyStreamerTrack);
     }
 
     public TrackListActivityFragment() {
@@ -84,7 +84,7 @@ public class TrackListActivityFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 SpotifyStreamerTrack spotifyStreamerTrack = (SpotifyStreamerTrack) parent.getItemAtPosition(position);
-                resultListener.playTrack(spotifyStreamerTrack);
+                resultListener.openSimplePlayer(spotifyStreamerTrack);
             }
         });
         return rootView;
@@ -188,6 +188,7 @@ public class TrackListActivityFragment extends Fragment {
                             break;
                         }
                     }
+                    spotifyStreamerTrack.setPreviewUrl(track.preview_url);
                     spotifyStreamerTrackList.add(spotifyStreamerTrack);
                 }
             } catch (Exception e) {

@@ -53,7 +53,7 @@ public class SearchArtistFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             spotifyStreamerResult = (SpotifyStreamerResult) getArguments()
-                    .get(getString(R.string.spotify_streamer_result));
+                    .getParcelable(getString(R.string.spotify_streamer_result));
 
         }
         setHasOptionsMenu(true);
@@ -92,7 +92,7 @@ public class SearchArtistFragment extends Fragment {
             }
         });
 
-        artistAdapter = new ArtistAdapter(getActivity().getApplicationContext(), searchArtistResultList);
+        artistAdapter = new ArtistAdapter(getActivity(), searchArtistResultList);
         listView.setAdapter(artistAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

@@ -6,8 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.marlowelandicho.myappportfolio.spotifystreamer.data.SpotifyStreamerTrack;
 
-public class SimplePlayerActivity extends AppCompatActivity {
+
+public class SimplePlayerActivity extends AppCompatActivity implements SimplePlayerActivityFragment.PlayerListener {
     private static final String SIMPLEPLAYER_ACTIVITY_FRAGMENT = "SPTAG";
 
     @Override
@@ -19,10 +21,12 @@ public class SimplePlayerActivity extends AppCompatActivity {
         SimplePlayerActivityFragment simplePlayerActivityFragment = new SimplePlayerActivityFragment();
         Bundle bundle = (Bundle) playTrackActivityIntent.getExtras();
         simplePlayerActivityFragment.setArguments(bundle);
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.layout_play_track, simplePlayerActivityFragment, SIMPLEPLAYER_ACTIVITY_FRAGMENT)
-                .addToBackStack(null)
-                .commit();
+//        getSupportFragmentManager().beginTransaction()
+//                .replace(R.id.layout_play_track, simplePlayerActivityFragment, SIMPLEPLAYER_ACTIVITY_FRAGMENT)
+//                .addToBackStack(null)
+//                .commit();
+
+        simplePlayerActivityFragment.show(getSupportFragmentManager(), SIMPLEPLAYER_ACTIVITY_FRAGMENT);
     }
 
 
@@ -41,5 +45,11 @@ public class SimplePlayerActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onPlay(SpotifyStreamerTrack spotifyStreamerTrack) {
+
+
     }
 }

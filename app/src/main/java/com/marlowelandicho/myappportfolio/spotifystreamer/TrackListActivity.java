@@ -15,13 +15,15 @@ public class TrackListActivity extends AppCompatActivity implements TrackListAct
     private static final String LOG_TAG = TrackListActivity.class.getSimpleName();
     private static final String TRACKLIST_ACTIVITY_FRAGMENT = "TAFTAG";
     private SpotifyStreamerResult spotifyStreamerResult;
+    TrackListActivityFragment trackListActivityFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_track_search);
         Intent trackListActivityIntent = getIntent();
-        TrackListActivityFragment trackListActivityFragment = new TrackListActivityFragment();
+        trackListActivityFragment = new TrackListActivityFragment();
         Bundle bundle = (Bundle) trackListActivityIntent.getExtras();
         trackListActivityFragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction()
@@ -53,7 +55,17 @@ public class TrackListActivity extends AppCompatActivity implements TrackListAct
     }
 
     @Override
-    public void playTrack(SpotifyStreamerTrack spotifyStreamerTrack) {
+    public void openSimplePlayer(SpotifyStreamerTrack spotifyStreamerTrack) {
+
+
+//        // Watch for button clicks.
+//        Button button = (Button) v.findViewById(R.id.show);
+//        button.setOnClickListener(new OnClickListener() {
+//            public void onClick(View v) {
+//                // When button is clicked, call up to owning activity.
+//                ((FragmentDialog) getActivity()).showDialog();
+//            }
+//        });
 
         Intent playTrackActivityIntent =
                 new Intent(this, SimplePlayerActivity.class);
@@ -61,5 +73,6 @@ public class TrackListActivity extends AppCompatActivity implements TrackListAct
         bundle.putParcelable(getString(R.string.spotify_streamer_track), spotifyStreamerTrack);
         playTrackActivityIntent.putExtras(playTrackActivityIntent);
         startActivity(playTrackActivityIntent);
+
     }
 }

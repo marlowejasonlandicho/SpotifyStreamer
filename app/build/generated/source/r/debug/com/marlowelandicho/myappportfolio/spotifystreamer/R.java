@@ -1510,6 +1510,9 @@ containing a value of this type.
         public static final int abc_textfield_search_material=0x7f02003a;
     }
     public static final class id {
+        public static final int ImageButton_player_next=0x7f0c005c;
+        public static final int ImageButton_player_play=0x7f0c005b;
+        public static final int ImageButton_player_prev=0x7f0c005a;
         public static final int action_bar=0x7f0c0040;
         public static final int action_bar_activity_content=0x7f0c0000;
         public static final int action_bar_container=0x7f0c003f;
@@ -1523,6 +1526,7 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f0c003d;
         public static final int action_mode_bar_stub=0x7f0c003c;
         public static final int action_mode_close_button=0x7f0c0025;
+        public static final int action_settings=0x7f0c0063;
         public static final int activity_chooser_view_content=0x7f0c0026;
         public static final int alertTitle=0x7f0c0030;
         public static final int always=0x7f0c0016;
@@ -1547,21 +1551,25 @@ containing a value of this type.
         public static final int icon=0x7f0c002b;
         public static final int ifRoom=0x7f0c0018;
         public static final int image=0x7f0c0028;
-        public static final int image_view_artist=0x7f0c0055;
-        public static final int image_view_track=0x7f0c0057;
-        public static final int input_artist_name=0x7f0c0051;
-        public static final int layout_view_artist_search_result=0x7f0c0050;
-        public static final int layout_view_track_search_result=0x7f0c0053;
+        public static final int image_view_artist=0x7f0c0057;
+        public static final int image_view_track=0x7f0c0060;
+        public static final int input_artist_name=0x7f0c0052;
+        public static final int layout_play_track=0x7f0c0054;
+        public static final int layout_view_artist_search_result=0x7f0c0051;
+        public static final int layout_view_track_search_result=0x7f0c005d;
         public static final int listMode=0x7f0c0009;
         public static final int list_item=0x7f0c002a;
-        public static final int list_view_artist_search_result=0x7f0c0052;
-        public static final int list_view_track_search_result=0x7f0c0054;
+        public static final int list_view_artist_search_result=0x7f0c0053;
+        public static final int list_view_track_search_result=0x7f0c005e;
         public static final int middle=0x7f0c0015;
         public static final int multiply=0x7f0c001e;
         public static final int never=0x7f0c0019;
         public static final int none=0x7f0c000e;
         public static final int normal=0x7f0c000a;
         public static final int parentPanel=0x7f0c002d;
+        public static final int player_text_view_album_name=0x7f0c0056;
+        public static final int player_text_view_artist_name=0x7f0c0055;
+        public static final int player_text_view_track_name=0x7f0c0058;
         public static final int progress_circular=0x7f0c0005;
         public static final int progress_horizontal=0x7f0c0006;
         public static final int radio=0x7f0c003a;
@@ -1577,11 +1585,13 @@ containing a value of this type.
         public static final int search_plate=0x7f0c0048;
         public static final int search_src_text=0x7f0c0049;
         public static final int search_voice_btn=0x7f0c004d;
+        public static final int seekbar_player=0x7f0c0059;
         public static final int select_dialog_listview=0x7f0c004e;
         public static final int shortcut=0x7f0c0039;
         public static final int showCustom=0x7f0c000f;
         public static final int showHome=0x7f0c0010;
         public static final int showTitle=0x7f0c0011;
+        public static final int simple_player=0x7f0c0050;
         public static final int split_action_bar=0x7f0c0007;
         public static final int spotify_streamer_main=0x7f0c004f;
         public static final int src_atop=0x7f0c0020;
@@ -1590,9 +1600,9 @@ containing a value of this type.
         public static final int submit_area=0x7f0c004b;
         public static final int tabMode=0x7f0c000b;
         public static final int textSpacerNoButtons=0x7f0c0033;
-        public static final int text_view_album_name=0x7f0c0059;
-        public static final int text_view_artist_name=0x7f0c0056;
-        public static final int text_view_track_name=0x7f0c0058;
+        public static final int text_view_album_name=0x7f0c0062;
+        public static final int text_view_artist_name=0x7f0c005f;
+        public static final int text_view_track_name=0x7f0c0061;
         public static final int title=0x7f0c002c;
         public static final int title_template=0x7f0c002f;
         public static final int topPanel=0x7f0c002e;
@@ -1633,18 +1643,20 @@ containing a value of this type.
         public static final int abc_select_dialog_material=0x7f040017;
         public static final int abc_simple_dropdown_hint=0x7f040018;
         public static final int activity_main=0x7f040019;
-        public static final int fragment_artist_search=0x7f04001a;
-        public static final int fragment_simple_player=0x7f04001b;
-        public static final int fragment_track_search=0x7f04001c;
-        public static final int list_item_individual_artist_search=0x7f04001d;
-        public static final int list_item_individual_track_search=0x7f04001e;
-        public static final int select_dialog_item_material=0x7f04001f;
-        public static final int select_dialog_multichoice_material=0x7f040020;
-        public static final int select_dialog_singlechoice_material=0x7f040021;
-        public static final int support_simple_spinner_dropdown_item=0x7f040022;
+        public static final int activity_simple_player=0x7f04001a;
+        public static final int fragment_artist_search=0x7f04001b;
+        public static final int fragment_simple_player=0x7f04001c;
+        public static final int fragment_track_search=0x7f04001d;
+        public static final int list_item_individual_artist_search=0x7f04001e;
+        public static final int list_item_individual_track_search=0x7f04001f;
+        public static final int select_dialog_item_material=0x7f040020;
+        public static final int select_dialog_multichoice_material=0x7f040021;
+        public static final int select_dialog_singlechoice_material=0x7f040022;
+        public static final int support_simple_spinner_dropdown_item=0x7f040023;
     }
     public static final class menu {
         public static final int menu_main=0x7f0d0000;
+        public static final int menu_simple_player=0x7f0d0001;
     }
     public static final class mipmap {
         public static final int ic_launcher=0x7f030000;
@@ -1667,18 +1679,23 @@ containing a value of this type.
         public static final int abc_shareactionprovider_share_with=0x7f06000b;
         public static final int abc_shareactionprovider_share_with_application=0x7f06000c;
         public static final int abc_toolbar_collapse_description=0x7f060010;
-        public static final int app_name=0x7f060011;
-        public static final int artist_no_result=0x7f060012;
-        public static final int artist_search_hint=0x7f060013;
-        public static final int hello_blank_fragment=0x7f060014;
-        public static final int hint_album_name=0x7f060015;
-        public static final int hint_no_image=0x7f060016;
-        public static final int hint_track_name=0x7f060017;
-        public static final int input_artist_name_message=0x7f060018;
-        public static final int spotify_streamer_result =0x7f060019;
-        public static final int spotify_exception_message=0x7f06001a;
-        public static final int text_top_tracks=0x7f06001b;
-        public static final int track_no_result=0x7f06001c;
+        public static final int action_settings=0x7f060011;
+        public static final int app_name=0x7f060012;
+        public static final int artist_no_result=0x7f060013;
+        public static final int artist_search_hint=0x7f060014;
+        public static final int hello_blank_fragment=0x7f060015;
+        public static final int hello_world=0x7f060016;
+        public static final int hint_album_name=0x7f060017;
+        public static final int hint_no_image=0x7f060018;
+        public static final int hint_track_name=0x7f060019;
+        public static final int input_artist_name_message=0x7f06001a;
+        public static final int spotify_exception_message=0x7f06001b;
+        public static final int spotify_streamer_artist=0x7f06001c;
+        public static final int spotify_streamer_result=0x7f06001d;
+        public static final int spotify_streamer_track=0x7f06001e;
+        public static final int text_top_tracks=0x7f06001f;
+        public static final int title_activity_simple_player=0x7f060020;
+        public static final int track_no_result=0x7f060021;
     }
     public static final class style {
         public static final int AlertDialog_AppCompat=0x7f08006b;

@@ -1,0 +1,8 @@
+<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/simple_player"
+    android:name="com.marlowelandicho.myappportfolio.spotifystreamer.SimplePlayerActivityFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:layout="@layout/fragment_simple_player" />
+<!-- From: file:/Users/marlowe.landicho/AndroidStudioProjects/SpotifyStreamer/app/src/main/res/layout/activity_simple_player.xml -->
