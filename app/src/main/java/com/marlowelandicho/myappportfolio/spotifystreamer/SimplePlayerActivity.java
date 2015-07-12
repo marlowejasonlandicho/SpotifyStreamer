@@ -21,12 +21,11 @@ public class SimplePlayerActivity extends AppCompatActivity implements SimplePla
         SimplePlayerActivityFragment simplePlayerActivityFragment = new SimplePlayerActivityFragment();
         Bundle bundle = (Bundle) playTrackActivityIntent.getExtras();
         simplePlayerActivityFragment.setArguments(bundle);
-//        getSupportFragmentManager().beginTransaction()
-//                .replace(R.id.layout_play_track, simplePlayerActivityFragment, SIMPLEPLAYER_ACTIVITY_FRAGMENT)
-//                .addToBackStack(null)
-//                .commit();
-
-        simplePlayerActivityFragment.show(getSupportFragmentManager(), SIMPLEPLAYER_ACTIVITY_FRAGMENT);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.simple_player, simplePlayerActivityFragment, SIMPLEPLAYER_ACTIVITY_FRAGMENT)
+                .addToBackStack(null)
+                .commit();
+//        simplePlayerActivityFragment.show(getSupportFragmentManager(), SIMPLEPLAYER_ACTIVITY_FRAGMENT);
     }
 
 

@@ -55,7 +55,7 @@ public class TopTrackAdapter extends BaseAdapter {
 
         if (track.getThumbnailUrl() != null) {
             Picasso.with(context)
-                    .load(track.getThumbnailUrl())
+                        .load(track.getThumbnailUrl())
                     .resize(50, 50)
                     .centerCrop()
                     .into(trackViewHolder.albumImageView);

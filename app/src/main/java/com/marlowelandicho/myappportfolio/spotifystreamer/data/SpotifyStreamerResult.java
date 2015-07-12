@@ -15,6 +15,7 @@ import java.util.Map;
 public class SpotifyStreamerResult implements Parcelable {
 
     private String artistId;
+    private String artistName;
     private String queryString;
     private int firstVisiblePosition;
     private List<SpotifyStreamerArtist> artists = new ArrayList<>();
@@ -39,6 +40,7 @@ public class SpotifyStreamerResult implements Parcelable {
 
     public SpotifyStreamerResult(Parcel source) {
         artistId = source.readString();
+        artistName = source.readString();
         queryString = source.readString();
         firstVisiblePosition = source.readInt();
         source.readList(artists, SpotifyStreamerArtist.class.getClassLoader());
@@ -52,6 +54,14 @@ public class SpotifyStreamerResult implements Parcelable {
 
     public void setArtistId(String artistId) {
         this.artistId = artistId;
+    }
+
+    public String getArtistName() {
+        return artistName;
+    }
+
+    public void setArtistName(String artistName) {
+        this.artistName = artistName;
     }
 
     public String getQueryString() {
@@ -107,11 +117,13 @@ public class SpotifyStreamerResult implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(artistId);
+        dest.writeString(artistName);
         dest.writeString(queryString);
         dest.writeInt(firstVisiblePosition);
         dest.writeList(artists);
 //        dest.writeList(artistTopTracks);
         dest.writeMap(artistTopTracks);
     }
+
 
 }

@@ -71,7 +71,7 @@ public class TrackListActivity extends AppCompatActivity implements TrackListAct
                 new Intent(this, SimplePlayerActivity.class);
         Bundle bundle = new Bundle();
         bundle.putParcelable(getString(R.string.spotify_streamer_track), spotifyStreamerTrack);
-        playTrackActivityIntent.putExtras(playTrackActivityIntent);
+        playTrackActivityIntent.putExtras(bundle);
         startActivity(playTrackActivityIntent);
 
     }

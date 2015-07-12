@@ -5,9 +5,11 @@ import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.marlowelandicho.myappportfolio.spotifystreamer.data.SpotifyStreamerTrack;
+import com.squareup.picasso.Picasso;
 
 public class SimplePlayerActivityFragment extends DialogFragment {
 
@@ -37,11 +39,19 @@ public class SimplePlayerActivityFragment extends DialogFragment {
         TextView textViewArtistName = (TextView) rootView.findViewById(R.id.player_text_view_artist_name);
         TextView textViewTrackName = (TextView) rootView.findViewById(R.id.player_text_view_track_name);
         TextView textViewAlbumName = (TextView) rootView.findViewById(R.id.player_text_view_album_name);
+        ImageView albumImageView = (ImageView) rootView.findViewById(R.id.player_image_view_album);
 
+        if (spotifyStreamerTrack.getThumbnailUrl() != null) {
+            Picasso.with(getActivity())
+                    .load(spotifyStreamerTrack.getThumbnailUrl())
+                    .resize(200, 200)
+                    .centerCrop()
+                    .into(albumImageView);
+
+        }
         textViewArtistName.setText(spotifyStreamerTrack.getArtistName());
         textViewTrackName.setText(spotifyStreamerTrack.getTrackName());
         textViewAlbumName.setText(spotifyStreamerTrack.getAlbumName());
-
 
 
         return rootView;

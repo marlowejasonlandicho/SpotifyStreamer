@@ -48,13 +48,21 @@
         </activity>
         <activity
             android:name="com.marlowelandicho.myappportfolio.spotifystreamer.SimplePlayerActivity"
-            android:label="@string/title_activity_simple_player" />
+            android:label="@string/app_name"
+            android:parentActivityName="com.marlowelandicho.myappportfolio.spotifystreamer.TrackListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.marlowelandicho.myappportfolio.spotifystreamer.TrackListActivity" />
+
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <service
             android:name="com.marlowelandicho.myappportfolio.spotifystreamer.SimplePlayerService"
             android:enabled="true"
-            android:exported="true" >
-        </service>
+            android:exported="true" />
     </application>
 
 </manifest>

@@ -100,6 +100,8 @@ public class SearchArtistFragment extends Fragment {
                 SpotifyStreamerArtist selectedArtist = (SpotifyStreamerArtist) parent.getItemAtPosition(position);
 
                 spotifyStreamerResult.setArtistId(selectedArtist.getArtistId());
+                spotifyStreamerResult.setArtistName(selectedArtist.getArtistName());
+
                 spotifyStreamerResult.setQueryString(q);
                 spotifyStreamerResult.clearSearchArtistResults();
                 spotifyStreamerResult.getArtists().addAll(searchArtistResultList);

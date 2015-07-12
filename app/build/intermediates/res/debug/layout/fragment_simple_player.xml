@@ -32,7 +32,7 @@
         android:textColor="#a5000000" />
 
     <ImageView
-        android:id="@+id/image_view_artist"
+        android:id="@+id/player_image_view_album"
         android:layout_width="fill_parent"
         android:layout_height="300dp"
         android:layout_below="@+id/player_text_view_album_name"

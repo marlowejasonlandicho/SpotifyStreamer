@@ -177,9 +177,7 @@ public class TrackListActivityFragment extends Fragment {
                 for (Track track : topTracksList) {
                     SpotifyStreamerTrack spotifyStreamerTrack = new SpotifyStreamerTrack();
                     spotifyStreamerTrack.setArtistId(track.id);
-                    if (track.artists != null && !track.artists.isEmpty()) {
-                        spotifyStreamerTrack.setArtistName(track.artists.get(0).name);
-                    }
+                    spotifyStreamerTrack.setArtistName(spotifyStreamerResult.getArtistName());
                     spotifyStreamerTrack.setAlbumName(track.album.name);
                     spotifyStreamerTrack.setTrackName(track.name);
                     for (Image image : track.album.images) {
