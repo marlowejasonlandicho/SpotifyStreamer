@@ -9,4 +9,11 @@
     <string name="hint_track_name">Track name goes here...</string>
     <string name="hint_album_name">Album name goes here...</string>
     <string name="hint_no_image">No Image available</string>
+    <string name="spotify_streamer_result">com.marlowelandicho.myappportfolio.spotifystreamer.SpotifyStreamerResult</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_simple_player">SimplePlayerActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="spotify_streamer_artist">com.marlowelandicho.myappportfolio.spotifystreamer.data.SpotifyStreamerArtist</string>
+    <string name="spotify_streamer_track">com.marlowelandicho.myappportfolio.spotifystreamer.data.SpotifyStreamerTrack</string>
 </resources>

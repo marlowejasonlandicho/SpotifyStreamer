@@ -1,16 +1,47 @@
 package com.marlowelandicho.myappportfolio.spotifystreamer.data;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /**
  * Created by marlowe.landicho on 27/6/15.
  */
-public class SpotifyStreamerTrack implements Serializable {
+public class SpotifyStreamerTrack implements Parcelable {
 
     private String artistId;
     private String artistName;
+    private String trackName;
     private String albumName;
     private String thumbnailUrl;
+    private String trackUrl;
+
+
+    public static final Parcelable.Creator<SpotifyStreamerTrack> CREATOR =
+            new Parcelable.Creator<SpotifyStreamerTrack>() {
+
+                @Override
+                public SpotifyStreamerTrack createFromParcel(Parcel source) {
+                    return new SpotifyStreamerTrack(source);
+                }
+
+                @Override
+                public SpotifyStreamerTrack[] newArray(int size) {
+                    return new SpotifyStreamerTrack[size];
+                }
+            };
+
+    public SpotifyStreamerTrack() {
+
+    }
+
+    public SpotifyStreamerTrack(Parcel source) {
+        artistId = source.readString();
+        artistName = source.readString();
+        trackName = source.readString();
+        albumName = source.readString();
+        thumbnailUrl = source.readString();
+        trackUrl = source.readString();
+    }
 
     public String getArtistId() {
         return artistId;
@@ -28,6 +59,14 @@ public class SpotifyStreamerTrack implements Serializable {
         this.artistName = artistName;
     }
 
+    public String getTrackName() {
+        return trackName;
+    }
+
+    public void setTrackName(String trackName) {
+        this.trackName = trackName;
+    }
+
     public String getAlbumName() {
         return albumName;
     }
@@ -43,4 +82,28 @@ public class SpotifyStreamerTrack implements Serializable {
     public void setThumbnailUrl(String thumbnailUrl) {
         this.thumbnailUrl = thumbnailUrl;
     }
+
+    public String getTrackUrl() {
+        return trackUrl;
+    }
+
+    public void setTrackUrl(String trackUrl) {
+        this.trackUrl = trackUrl;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(artistId);
+        dest.writeString(artistName);
+        dest.writeString(trackName);
+        dest.writeString(albumName);
+        dest.writeString(thumbnailUrl);
+        dest.writeString(trackUrl);
+    }
+
 }

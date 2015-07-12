@@ -7,9 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 
 import com.marlowelandicho.myappportfolio.spotifystreamer.data.SpotifyStreamerResult;
+import com.marlowelandicho.myappportfolio.spotifystreamer.data.SpotifyStreamerTrack;
 
 
-public class TrackListActivity extends AppCompatActivity implements TrackListActivityFragment.ResultListener {
+public class TrackListActivity extends AppCompatActivity implements TrackListActivityFragment.TrackListListener {
 
     private static final String LOG_TAG = TrackListActivity.class.getSimpleName();
     private static final String TRACKLIST_ACTIVITY_FRAGMENT = "TAFTAG";
@@ -43,11 +44,22 @@ public class TrackListActivity extends AppCompatActivity implements TrackListAct
     @Override
     public void populateResult(SpotifyStreamerResult spotifyStreamerResult) {
         this.spotifyStreamerResult = spotifyStreamerResult;
-        Intent intent = new Intent();
+        Intent returnIntent = new Intent();
         Bundle bundle = new Bundle();
-        bundle.putParcelable("com.marlowelandicho.myappportfolio.spotifystreamer.SpotifyStreamerResult", spotifyStreamerResult);
-        intent.putExtras(bundle);
-        setResult(Activity.RESULT_OK, intent);
+        bundle.putParcelable(getString(R.string.spotify_streamer_result), spotifyStreamerResult);
+        returnIntent.putExtras(bundle);
+        setResult(Activity.RESULT_OK, returnIntent);
         finish();
+    }
+
+    @Override
+    public void playTrack(SpotifyStreamerTrack spotifyStreamerTrack) {
+
+        Intent playTrackActivityIntent =
+                new Intent(this, SimplePlayerActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(getString(R.string.spotify_streamer_track), spotifyStreamerTrack);
+        playTrackActivityIntent.putExtras(playTrackActivityIntent);
+        startActivity(playTrackActivityIntent);
     }
 }

@@ -51,11 +51,9 @@ public class SearchArtistFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        spotifyStreamerResult = (SpotifyStreamerResult) getArguments()
-                .get("com.marlowelandicho.myappportfolio.spotifystreamer.SpotifyStreamerResult");
-
-        if (savedInstanceState != null && spotifyStreamerResult == null) {
+        if (getArguments() != null) {
+            spotifyStreamerResult = (SpotifyStreamerResult) getArguments()
+                    .get(getString(R.string.spotify_streamer_result));
 
         }
         setHasOptionsMenu(true);
@@ -159,8 +157,14 @@ public class SearchArtistFragment extends Fragment {
             resultListener = (ResultListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
-                    + " must implement ResultListener");
+                    + " must implement TrackListListener");
         }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        resultListener = null;
     }
 
     public class SearchArtistTask extends AsyncTask<String, Void, List<SpotifyStreamerArtist>> {

@@ -11,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -41,10 +42,12 @@ public class TrackListActivityFragment extends Fragment {
     private String artistId;
     private SpotifyStreamerResult spotifyStreamerResult;
     private static final String LOG_TAG = TrackListActivityFragment.class.getSimpleName();
-    private ResultListener resultListener;
+    private TrackListListener resultListener;
 
-    public interface ResultListener {
+    public interface TrackListListener {
         public void populateResult(SpotifyStreamerResult spotifyStreamerResult);
+
+        public void playTrack(SpotifyStreamerTrack spotifyStreamerTrack);
     }
 
     public TrackListActivityFragment() {
@@ -58,8 +61,9 @@ public class TrackListActivityFragment extends Fragment {
         List<SpotifyStreamerTrack> localTrackList = null;
 
         paramMap.put("country", Locale.getDefault().getCountry());
-        spotifyStreamerResult = (SpotifyStreamerResult) getArguments().getParcelable("com.marlowelandicho.myappportfolio.spotifystreamer.SpotifyStreamerResult");
-
+        if (getArguments() != null) {
+            spotifyStreamerResult = (SpotifyStreamerResult) getArguments().getParcelable(getString(R.string.spotify_streamer_result));
+        }
         if (spotifyStreamerResult != null) {
             artistId = spotifyStreamerResult.getArtistId();
             localTrackList = spotifyStreamerResult.getArtistTopTracks(artistId);
@@ -75,6 +79,14 @@ public class TrackListActivityFragment extends Fragment {
         if (localTrackList == null || localTrackList.size() == 0) {
             updateTopTrackResult(artistId);
         }
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                SpotifyStreamerTrack spotifyStreamerTrack = (SpotifyStreamerTrack) parent.getItemAtPosition(position);
+                resultListener.playTrack(spotifyStreamerTrack);
+            }
+        });
         return rootView;
     }
 
@@ -113,11 +125,17 @@ public class TrackListActivityFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            resultListener = (ResultListener) activity;
+            resultListener = (TrackListListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
-                    + " must implement ResultListener");
+                    + " must implement TrackListListener");
         }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        resultListener = null;
     }
 
     public class SearchTopTrackTask extends AsyncTask<String, Void, List<SpotifyStreamerTrack>> {
@@ -153,16 +171,17 @@ public class TrackListActivityFragment extends Fragment {
             try {
                 SpotifyApi api = new SpotifyApi();
                 SpotifyService spotifyService = api.getService();
-
                 Tracks topTracks = spotifyService.getArtistTopTrack(artistIdParam, paramMap);
                 List<Track> topTracksList = topTracks.tracks;
-
 
                 for (Track track : topTracksList) {
                     SpotifyStreamerTrack spotifyStreamerTrack = new SpotifyStreamerTrack();
                     spotifyStreamerTrack.setArtistId(track.id);
-                    spotifyStreamerTrack.setArtistName(track.name);
+                    if (track.artists != null && !track.artists.isEmpty()) {
+                        spotifyStreamerTrack.setArtistName(track.artists.get(0).name);
+                    }
                     spotifyStreamerTrack.setAlbumName(track.album.name);
+                    spotifyStreamerTrack.setTrackName(track.name);
                     for (Image image : track.album.images) {
                         if (image.height <= 200 && image.url != null) {
                             spotifyStreamerTrack.setThumbnailUrl(image.url);

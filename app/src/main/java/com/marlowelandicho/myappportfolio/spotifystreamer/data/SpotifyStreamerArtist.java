@@ -1,15 +1,14 @@
 package com.marlowelandicho.myappportfolio.spotifystreamer.data;
 
-import java.io.Serializable;
-
 /**
  * Created by marlowe.landicho on 27/6/15.
  */
-public class SpotifyStreamerArtist implements Serializable {
+public class SpotifyStreamerArtist {
 
     private String artistId;
     private String artistName;
     private String thumbnailUrl;
+    private String trackUrl;
 
     public String getArtistId() {
         return artistId;
@@ -34,4 +33,22 @@ public class SpotifyStreamerArtist implements Serializable {
     public void setThumbnailUrl(String thumbnailUrl) {
         this.thumbnailUrl = thumbnailUrl;
     }
+
+    public String getTrackUrl() {
+        return trackUrl;
+    }
+
+    public void setTrackUrl(String trackUrl) {
+        this.trackUrl = trackUrl;
+    }
+//
+//    @Override
+//    public int describeContents() {
+//        return 0;
+//    }
+//
+//    @Override
+//    public void writeToParcel(Parcel dest, int flags) {
+//
+//    }
 }
