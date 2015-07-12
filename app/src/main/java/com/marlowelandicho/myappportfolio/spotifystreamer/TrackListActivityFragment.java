@@ -41,12 +41,10 @@ public class TrackListActivityFragment extends Fragment {
     private String artistId;
     private SpotifyStreamerResult spotifyStreamerResult;
     private static final String LOG_TAG = TrackListActivityFragment.class.getSimpleName();
+    private ResultListener resultListener;
 
-    OnPopulateResultListener mCallback;
-
-
-    public interface OnPopulateResultListener {
-        public void onPopulateResult(SpotifyStreamerResult spotifyStreamerResult);
+    public interface ResultListener {
+        public void populateResult(SpotifyStreamerResult spotifyStreamerResult);
     }
 
     public TrackListActivityFragment() {
@@ -88,7 +86,7 @@ public class TrackListActivityFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            mCallback.onPopulateResult(spotifyStreamerResult);
+            resultListener.populateResult(spotifyStreamerResult);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -108,7 +106,6 @@ public class TrackListActivityFragment extends Fragment {
     }
 
     public void onPause() {
-
         super.onPause();
     }
 
@@ -116,10 +113,10 @@ public class TrackListActivityFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            mCallback = (OnPopulateResultListener) activity;
+            resultListener = (ResultListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
-                    + " must implement OnPopulateResultListener");
+                    + " must implement ResultListener");
         }
     }
 
@@ -143,9 +140,7 @@ public class TrackListActivityFragment extends Fragment {
                 }
             }
             spotifyStreamerResult.addArtistTopTracks(artistId, topTrackResultList);
-
             topTrackAdapter.notifyDataSetChanged();
-
         }
 
         @Override

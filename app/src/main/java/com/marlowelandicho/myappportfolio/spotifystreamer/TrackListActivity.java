@@ -9,12 +9,11 @@ import android.view.Menu;
 import com.marlowelandicho.myappportfolio.spotifystreamer.data.SpotifyStreamerResult;
 
 
-public class TrackListActivity extends AppCompatActivity implements TrackListActivityFragment.OnPopulateResultListener {
+public class TrackListActivity extends AppCompatActivity implements TrackListActivityFragment.ResultListener {
 
     private static final String LOG_TAG = TrackListActivity.class.getSimpleName();
     private static final String TRACKLIST_ACTIVITY_FRAGMENT = "TAFTAG";
     private SpotifyStreamerResult spotifyStreamerResult;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,16 +22,11 @@ public class TrackListActivity extends AppCompatActivity implements TrackListAct
         Intent trackListActivityIntent = getIntent();
         TrackListActivityFragment trackListActivityFragment = new TrackListActivityFragment();
         Bundle bundle = (Bundle) trackListActivityIntent.getExtras();
-//        spotifyStreamerResult = bundle.getParcelable("com.marlowelandicho.myappportfolio.spotifystreamer.SpotifyStreamerResult");
-
         trackListActivityFragment.setArguments(bundle);
-
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.layout_view_track_search_result, trackListActivityFragment, TRACKLIST_ACTIVITY_FRAGMENT)
-                    .addToBackStack(null)
-                    .commit();
-        }
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.layout_view_track_search_result, trackListActivityFragment, TRACKLIST_ACTIVITY_FRAGMENT)
+                .addToBackStack(null)
+                .commit();
     }
 
     @Override
@@ -47,7 +41,7 @@ public class TrackListActivity extends AppCompatActivity implements TrackListAct
     }
 
     @Override
-    public void onPopulateResult(SpotifyStreamerResult spotifyStreamerResult) {
+    public void populateResult(SpotifyStreamerResult spotifyStreamerResult) {
         this.spotifyStreamerResult = spotifyStreamerResult;
         Intent intent = new Intent();
         Bundle bundle = new Bundle();

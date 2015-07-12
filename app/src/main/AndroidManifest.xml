@@ -23,7 +23,8 @@
 
         <activity
             android:name=".TrackListActivity"
-            android:label="@string/text_top_tracks">
+            android:label="@string/text_top_tracks"
+            android:parentActivityName=".SpotifyStreamerMainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.marlowelandicho.myappportfolio.spotifystreamer.SpotifyStreamerMainActivity" />

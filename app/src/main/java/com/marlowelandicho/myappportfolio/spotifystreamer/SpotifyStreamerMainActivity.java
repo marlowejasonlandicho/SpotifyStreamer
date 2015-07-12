@@ -11,13 +11,12 @@ import android.view.MenuItem;
 import com.marlowelandicho.myappportfolio.spotifystreamer.data.SpotifyStreamerResult;
 
 
-public class SpotifyStreamerMainActivity extends AppCompatActivity implements SearchArtistFragment.OnPopulateResultListener {
+public class SpotifyStreamerMainActivity extends AppCompatActivity implements SearchArtistFragment.ResultListener {
 
     private final String SEARCH_ARTIST_FRAGMENT = "SAFTAG";
     private final String LOG_TAG = SpotifyStreamerMainActivity.class.getSimpleName();
     private int REQUEST_CODE = 10;
     private SpotifyStreamerResult spotifyStreamerResult;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,19 +24,21 @@ public class SpotifyStreamerMainActivity extends AppCompatActivity implements Se
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        SearchArtistFragment searchArtistFragment = new SearchArtistFragment();
+        Bundle bundle = new Bundle();
+
         if (savedInstanceState == null && spotifyStreamerResult == null) {
             spotifyStreamerResult = new SpotifyStreamerResult();
-
-            SearchArtistFragment searchArtistFragment = new SearchArtistFragment();
-            Bundle bundle = new Bundle();
             bundle.putParcelable("com.marlowelandicho.myappportfolio.spotifystreamer.SpotifyStreamerResult", spotifyStreamerResult);
-            searchArtistFragment.setArguments(bundle);
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.spotify_streamer_main, searchArtistFragment, SEARCH_ARTIST_FRAGMENT).addToBackStack(null)
-                    .commit();
+
         } else {
             spotifyStreamerResult = savedInstanceState.getParcelable("com.marlowelandicho.myappportfolio.spotifystreamer.SpotifyStreamerResult");
         }
+
+        searchArtistFragment.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.spotify_streamer_main, searchArtistFragment, SEARCH_ARTIST_FRAGMENT).addToBackStack(null)
+                .commit();
     }
 
     @Override
@@ -77,7 +78,7 @@ public class SpotifyStreamerMainActivity extends AppCompatActivity implements Se
     }
 
     @Override
-    public void onPopulateResult(SpotifyStreamerResult spotifyStreamerResult) {
+    public void populateResult(SpotifyStreamerResult spotifyStreamerResult) {
         Intent trackListActivityIntent =
                 new Intent(this, TrackListActivity.class);
         spotifyStreamerResult.addArtistTopTracks(

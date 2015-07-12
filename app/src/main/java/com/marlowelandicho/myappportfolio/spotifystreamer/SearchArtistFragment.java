@@ -39,14 +39,13 @@ public class SearchArtistFragment extends Fragment {
     private List<SpotifyStreamerArtist> searchArtistResultList = new ArrayList<>();
     private SpotifyStreamerResult spotifyStreamerResult;
     private String q;
-
-    OnPopulateResultListener mCallback;
+    private ResultListener resultListener;
 
     public SearchArtistFragment() {
     }
 
-    public interface OnPopulateResultListener {
-        public void onPopulateResult(SpotifyStreamerResult spotifyStreamerResult);
+    public interface ResultListener {
+        public void populateResult(SpotifyStreamerResult spotifyStreamerResult);
     }
 
     @Override
@@ -107,9 +106,7 @@ public class SearchArtistFragment extends Fragment {
                 spotifyStreamerResult.clearSearchArtistResults();
                 spotifyStreamerResult.getArtists().addAll(searchArtistResultList);
 
-                mCallback.onPopulateResult(spotifyStreamerResult);
-
-
+                resultListener.populateResult(spotifyStreamerResult);
             }
         });
 
@@ -136,11 +133,9 @@ public class SearchArtistFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-
         ListView listView = (ListView) getActivity().findViewById(R.id.list_view_artist_search_result);
         int firstVisiblePosition = listView.getFirstVisiblePosition();
         spotifyStreamerResult.setFirstVisiblePosition(new Integer(firstVisiblePosition));
-//        spotifyStreamerResult.setQueryString(q);
         spotifyStreamerResult.getArtists().clear();
         spotifyStreamerResult.getArtists().addAll(searchArtistResultList);
     }
@@ -152,22 +147,19 @@ public class SearchArtistFragment extends Fragment {
         ListView listView = (ListView) getActivity().findViewById(R.id.list_view_artist_search_result);
         listView.setSelection(spotifyStreamerResult.getFirstVisiblePosition());
         listView.requestFocus();
-
         searchArtistResultList.clear();
-
         searchArtistResultList.addAll(spotifyStreamerResult.getArtists());
         artistAdapter.notifyDataSetChanged();
-
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            mCallback = (OnPopulateResultListener) activity;
+            resultListener = (ResultListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
-                    + " must implement OnPopulateResultListener");
+                    + " must implement ResultListener");
         }
     }
 
@@ -191,7 +183,6 @@ public class SearchArtistFragment extends Fragment {
                 }
             }
             artistAdapter.notifyDataSetChanged();
-
         }
 
         @Override
@@ -231,6 +222,4 @@ public class SearchArtistFragment extends Fragment {
             return spotifyStreamerArtistList;
         }
     }
-
-
 }

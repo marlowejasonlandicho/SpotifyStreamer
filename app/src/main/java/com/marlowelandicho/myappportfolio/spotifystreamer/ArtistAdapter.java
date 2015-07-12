@@ -20,8 +20,6 @@ import java.util.List;
 public class ArtistAdapter extends BaseAdapter {
 
     private final String LOG_TAG = ArtistAdapter.class.getSimpleName();
-
-
     private final Context context;
     private final List<SpotifyStreamerArtist> artistList;
 
