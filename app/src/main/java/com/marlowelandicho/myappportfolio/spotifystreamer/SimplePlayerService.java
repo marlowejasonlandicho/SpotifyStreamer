@@ -1,8 +1,8 @@
 package com.marlowelandicho.myappportfolio.spotifystreamer;
 
+import android.app.IntentService;
 import android.app.Notification;
 import android.app.PendingIntent;
-import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
@@ -16,7 +16,7 @@ import com.marlowelandicho.myappportfolio.spotifystreamer.data.SpotifyStreamerTr
 
 import java.io.IOException;
 
-public class SimplePlayerService extends Service implements MediaPlayer.OnPreparedListener, MediaPlayer.OnErrorListener {
+public class SimplePlayerService extends IntentService implements MediaPlayer.OnPreparedListener, MediaPlayer.OnErrorListener {
     private static final String ACTION_PLAY = "com.marlowelandicho.myappportfolio.spotifystreamer.play";
     private static final int NOTIFICATION_ID = 10;
     private static final String LOG_TAG = SimplePlayerService.class.getSimpleName();
@@ -25,6 +25,7 @@ public class SimplePlayerService extends Service implements MediaPlayer.OnPrepar
     private MediaPlayer mediaPlayer = null;
 
     public SimplePlayerService() {
+        super("com.marlowelandicho.myappportfolio.spotifystreamer.SimplePlayerService");
     }
 
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -68,6 +69,11 @@ public class SimplePlayerService extends Service implements MediaPlayer.OnPrepar
     @Override
     public IBinder onBind(Intent intent) {
         throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    @Override
+    protected void onHandleIntent(Intent intent) {
+
     }
 
     @Override

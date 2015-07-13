@@ -15,7 +15,8 @@ public class TrackListActivity extends AppCompatActivity implements TrackListAct
     private static final String LOG_TAG = TrackListActivity.class.getSimpleName();
     private static final String TRACKLIST_ACTIVITY_FRAGMENT = "TAFTAG";
     private SpotifyStreamerResult spotifyStreamerResult;
-    TrackListActivityFragment trackListActivityFragment;
+    private TrackListActivityFragment trackListActivityFragment;
+    private int REQUEST_CODE = 10;
 
 
     @Override
@@ -55,10 +56,17 @@ public class TrackListActivity extends AppCompatActivity implements TrackListAct
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE) {
+            Bundle bundle = data.getExtras();
+            this.spotifyStreamerResult = bundle.getParcelable(getString(R.string.spotify_streamer_result));
+        }
+    }
+
+    @Override
     public void openSimplePlayer(SpotifyStreamerTrack spotifyStreamerTrack) {
 
-
-//        // Watch for button clicks.
 //        Button button = (Button) v.findViewById(R.id.show);
 //        button.setOnClickListener(new OnClickListener() {
 //            public void onClick(View v) {
@@ -71,8 +79,11 @@ public class TrackListActivity extends AppCompatActivity implements TrackListAct
                 new Intent(this, SimplePlayerActivity.class);
         Bundle bundle = new Bundle();
         bundle.putParcelable(getString(R.string.spotify_streamer_track), spotifyStreamerTrack);
+        bundle.putParcelable(getString(R.string.spotify_streamer_result), this.spotifyStreamerResult);
+
         playTrackActivityIntent.putExtras(bundle);
-        startActivity(playTrackActivityIntent);
+//        startActivity(playTrackActivityIntent);
+        startActivityForResult(playTrackActivityIntent, REQUEST_CODE);
 
     }
 }

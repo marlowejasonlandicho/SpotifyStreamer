@@ -1510,9 +1510,9 @@ containing a value of this type.
         public static final int abc_textfield_search_material=0x7f02003a;
     }
     public static final class id {
-        public static final int ImageButton_player_next=0x7f0c005d;
-        public static final int ImageButton_player_play=0x7f0c005c;
-        public static final int ImageButton_player_prev=0x7f0c005b;
+        public static final int ImageButton_player_next=0x7f0c005c;
+        public static final int ImageButton_player_play=0x7f0c005b;
+        public static final int ImageButton_player_prev=0x7f0c005a;
         public static final int action_bar=0x7f0c0040;
         public static final int action_bar_activity_content=0x7f0c0000;
         public static final int action_bar_container=0x7f0c003f;
@@ -1551,16 +1551,16 @@ containing a value of this type.
         public static final int icon=0x7f0c002b;
         public static final int ifRoom=0x7f0c0018;
         public static final int image=0x7f0c0028;
-        public static final int image_view_artist=0x7f0c0059;
+        public static final int image_view_artist=0x7f0c005f;
         public static final int image_view_track=0x7f0c0061;
         public static final int input_artist_name=0x7f0c0052;
         public static final int layout_play_track=0x7f0c0054;
         public static final int layout_view_artist_search_result=0x7f0c0051;
-        public static final int layout_view_track_search_result=0x7f0c005e;
+        public static final int layout_view_track_search_result=0x7f0c005d;
         public static final int listMode=0x7f0c0009;
         public static final int list_item=0x7f0c002a;
         public static final int list_view_artist_search_result=0x7f0c0053;
-        public static final int list_view_track_search_result=0x7f0c005f;
+        public static final int list_view_track_search_result=0x7f0c005e;
         public static final int middle=0x7f0c0015;
         public static final int multiply=0x7f0c001e;
         public static final int never=0x7f0c0019;
@@ -1586,7 +1586,7 @@ containing a value of this type.
         public static final int search_plate=0x7f0c0048;
         public static final int search_src_text=0x7f0c0049;
         public static final int search_voice_btn=0x7f0c004d;
-        public static final int seekbar_player=0x7f0c005a;
+        public static final int seekbar_player=0x7f0c0059;
         public static final int select_dialog_listview=0x7f0c004e;
         public static final int shortcut=0x7f0c0039;
         public static final int showCustom=0x7f0c000f;

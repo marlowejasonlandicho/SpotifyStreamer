@@ -1,16 +1,21 @@
 package com.marlowelandicho.myappportfolio.spotifystreamer;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.marlowelandicho.myappportfolio.spotifystreamer.data.SpotifyStreamerResult;
 import com.marlowelandicho.myappportfolio.spotifystreamer.data.SpotifyStreamerTrack;
 
 
-public class SimplePlayerActivity extends AppCompatActivity implements SimplePlayerActivityFragment.PlayerListener {
+public class SimplePlayerActivity extends AppCompatActivity implements SimplePlayerActivityFragment.SimplePlayerListener {
     private static final String SIMPLEPLAYER_ACTIVITY_FRAGMENT = "SPTAG";
+    private SpotifyStreamerResult spotifyStreamerResult;
+    private SpotifyStreamerTrack spotifyStreamerTrack;
+    private SimplePlayerActivityFragment simplePlayerActivityFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,8 +23,10 @@ public class SimplePlayerActivity extends AppCompatActivity implements SimplePla
         setContentView(R.layout.activity_simple_player);
 
         Intent playTrackActivityIntent = getIntent();
-        SimplePlayerActivityFragment simplePlayerActivityFragment = new SimplePlayerActivityFragment();
+        simplePlayerActivityFragment = new SimplePlayerActivityFragment();
         Bundle bundle = (Bundle) playTrackActivityIntent.getExtras();
+        this.spotifyStreamerResult = bundle.getParcelable(getString(R.string.spotify_streamer_result));
+
         simplePlayerActivityFragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.simple_player, simplePlayerActivityFragment, SIMPLEPLAYER_ACTIVITY_FRAGMENT)
@@ -41,14 +48,29 @@ public class SimplePlayerActivity extends AppCompatActivity implements SimplePla
 
         if (id == R.id.action_settings) {
             return true;
+        } else if (id == android.R.id.home) {
+            populateResult(spotifyStreamerTrack);
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
     @Override
-    public void onPlay(SpotifyStreamerTrack spotifyStreamerTrack) {
+    public void populateResult(SpotifyStreamerTrack spotifyStreamerTrack) {
+        this.spotifyStreamerTrack = spotifyStreamerTrack;
+        Intent returnIntent = new Intent();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(getString(R.string.spotify_streamer_result), this.spotifyStreamerResult);
+        bundle.putParcelable(getString(R.string.spotify_streamer_track), this.spotifyStreamerTrack);
+        returnIntent.putExtras(bundle);
+        setResult(Activity.RESULT_OK, returnIntent);
+        finish();
+    }
 
+
+    @Override
+    public void onPlay(SpotifyStreamerTrack spotifyStreamerTrack) {
 
     }
 }

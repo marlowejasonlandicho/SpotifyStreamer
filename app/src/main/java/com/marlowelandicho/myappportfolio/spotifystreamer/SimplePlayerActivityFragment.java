@@ -1,5 +1,6 @@
 package com.marlowelandicho.myappportfolio.spotifystreamer;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
@@ -15,11 +16,17 @@ public class SimplePlayerActivityFragment extends DialogFragment {
 
     private SpotifyStreamerTrack spotifyStreamerTrack;
     private static final String LOG_TAG = SimplePlayerActivityFragment.class.getSimpleName();
-//    private MediaPlayer mediaPlayer;
+    //    private MediaPlayer mediaPlayer;
+    private SimplePlayerListener simplePlayerListener;
+//    private SpotifyStreamerResult spotifyStreamerResult;
 
+    public interface SimplePlayerListener {
+        public void populateResult(SpotifyStreamerTrack spotifyStreamerTrack);
+
+        public void onPlay(SpotifyStreamerTrack spotifyStreamerTrack);
+    }
 
     public SimplePlayerActivityFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -57,33 +64,32 @@ public class SimplePlayerActivityFragment extends DialogFragment {
         return rootView;
 
     }
-
-
-//    public void onButtonPressed(Uri uri) {
-//        if (mListener != null) {
-//            mListener.onFragmentInteraction(uri);
-//        }
-//    }
-
+//
 //    @Override
-//    public void onAttach(Activity activity) {
-//        super.onAttach(activity);
-//        try {
-//            mListener = (OnFragmentInteractionListener) activity;
-//        } catch (ClassCastException e) {
-//            throw new ClassCastException(activity.toString()
-//                    + " must implement OnFragmentInteractionListener");
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        int id = item.getItemId();
+//        if (id == android.R.id.home) {
+//            simplePlayerListener.populateResult(spotifyStreamerTrack);
+//            return true;
 //        }
+//        return super.onOptionsItemSelected(item);
 //    }
 
-//    @Override
-//    public void onDetach() {
-//        super.onDetach();
-//        mListener = null;
-//    }
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            simplePlayerListener = (SimplePlayerListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement SimplePlayerListener");
+        }
+    }
 
-    public interface PlayerListener {
-        public void onPlay(SpotifyStreamerTrack spotifyStreamerTrack);
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        simplePlayerListener = null;
     }
 
 }
