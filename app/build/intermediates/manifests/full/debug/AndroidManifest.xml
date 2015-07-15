@@ -59,10 +59,7 @@
             </intent-filter>
         </activity>
 
-        <service
-            android:name="com.marlowelandicho.myappportfolio.spotifystreamer.SimplePlayerService"
-            android:enabled="true"
-            android:exported="true" />
+        <service android:name="com.marlowelandicho.myappportfolio.spotifystreamer.SimplePlayerService" />
     </application>
 
 </manifest>

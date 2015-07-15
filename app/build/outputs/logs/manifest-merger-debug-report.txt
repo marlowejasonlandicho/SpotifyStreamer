@@ -81,12 +81,8 @@ ADDED from AndroidManifest.xml:35:9
 		ADDED from AndroidManifest.xml:36:13
 service#com.marlowelandicho.myappportfolio.spotifystreamer.SimplePlayerService
 ADDED from AndroidManifest.xml:47:9
-	android:enabled
-		ADDED from AndroidManifest.xml:49:13
-	android:exported
-		ADDED from AndroidManifest.xml:50:13
 	android:name
-		ADDED from AndroidManifest.xml:48:13
+		ADDED from AndroidManifest.xml:47:18
 uses-sdk
 INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
 MERGED from com.android.support:appcompat-v7:22.1.1:20:5

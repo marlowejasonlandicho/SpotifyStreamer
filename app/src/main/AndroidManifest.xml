@@ -44,10 +44,7 @@
             </intent-filter>
         </activity>
 
-        <service
-            android:name=".SimplePlayerService"
-            android:enabled="true"
-            android:exported="true"></service>
+        <service android:name=".SimplePlayerService"></service>
     </application>
 
 </manifest>

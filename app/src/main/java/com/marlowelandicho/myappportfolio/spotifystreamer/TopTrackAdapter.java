@@ -61,7 +61,7 @@ public class TopTrackAdapter extends BaseAdapter {
                     .into(trackViewHolder.albumImageView);
 
         }
-        trackViewHolder.txtViewTrackName.setText(track.getArtistName());
+        trackViewHolder.txtViewTrackName.setText(track.getTrackName());
         trackViewHolder.txtViewAlbumName.setText(track.getAlbumName());
 
         return topTrackView;

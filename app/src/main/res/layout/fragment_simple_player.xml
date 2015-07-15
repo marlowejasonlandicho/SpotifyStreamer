@@ -33,7 +33,7 @@
     <ImageView
         android:id="@+id/player_image_view_album"
         android:layout_width="fill_parent"
-        android:layout_height="300dp"
+        android:layout_height="200dp"
         android:layout_below="@+id/player_text_view_album_name"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -62,6 +62,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:gravity="center|center_horizontal|center_vertical"
+        android:indeterminate="false"
         android:textColor="#a5000000" />
 
     <LinearLayout
@@ -73,44 +74,44 @@
         android:gravity="center|center_vertical|center_horizontal">
 
         <ImageButton
-            android:id="@+id/ImageButton_player_prev"
+            android:id="@+id/imageButton_player_prev"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/seekbar_player"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:src="@android:drawable/ic_media_previous"
-            android:clickable="false" />
+            android:clickable="false"
+            android:src="@android:drawable/ic_media_previous" />
 
         <ImageButton
-            android:id="@+id/ImageButton_player_play"
+            android:id="@+id/imageButton_player_play"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/seekbar_player"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_toRightOf="@id/ImageButton_player_prev"
+            android:layout_toRightOf="@id/imageButton_player_prev"
             android:src="@android:drawable/ic_media_play" />
 
-        <!--<ImageButton-->
-        <!--android:id="@+id/ImageButton_player_pause"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@+id/seekbar_player"-->
-        <!--android:layout_marginLeft="20dp"-->
-        <!--android:layout_marginRight="20dp"-->
-        <!--android:layout_toRightOf="@id/ImageButton_player_prev"-->
-        <!--android:src="@android:drawable/ic_media_pause"-->
-        <!--android:visibility="gone" />-->
-
         <ImageButton
-            android:id="@+id/ImageButton_player_next"
+            android:id="@+id/imageButton_player_pause"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/seekbar_player"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_toRightOf="@id/ImageButton_player_play"
+            android:layout_toRightOf="@id/imageButton_player_prev"
+            android:src="@android:drawable/ic_media_pause"
+            android:visibility="gone" />
+
+        <ImageButton
+            android:id="@+id/imageButton_player_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/seekbar_player"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_toRightOf="@id/imageButton_player_play"
             android:src="@android:drawable/ic_media_next" />
     </LinearLayout>
 

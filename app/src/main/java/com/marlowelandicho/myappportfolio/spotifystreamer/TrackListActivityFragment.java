@@ -107,7 +107,6 @@ public class TrackListActivityFragment extends Fragment {
     private void updateTopTrackResult(String artistIdParam) {
         SearchTopTrackTask searchTopTrackTask = new SearchTopTrackTask();
         searchTopTrackTask.execute(artistIdParam);
-
 //        for (int i = 0; i <= 10; i++) {
 //            SpotifyStreamerTrack spotifyStreamerTrack = new SpotifyStreamerTrack();
 //            spotifyStreamerTrack.setArtistId("1" + i);

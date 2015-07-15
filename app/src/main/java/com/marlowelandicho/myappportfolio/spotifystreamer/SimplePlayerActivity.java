@@ -16,9 +16,12 @@ public class SimplePlayerActivity extends AppCompatActivity implements SimplePla
     private SpotifyStreamerResult spotifyStreamerResult;
     private SpotifyStreamerTrack spotifyStreamerTrack;
     private SimplePlayerActivityFragment simplePlayerActivityFragment;
+    //    private MediaPlayer mediaPlayer = new MediaPlayer();
+    private Intent mediaPlayerIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mediaPlayerIntent = new Intent(this, SimplePlayerService.class);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_simple_player);
 
@@ -32,6 +35,8 @@ public class SimplePlayerActivity extends AppCompatActivity implements SimplePla
                 .replace(R.id.simple_player, simplePlayerActivityFragment, SIMPLEPLAYER_ACTIVITY_FRAGMENT)
                 .addToBackStack(null)
                 .commit();
+
+
 //        simplePlayerActivityFragment.show(getSupportFragmentManager(), SIMPLEPLAYER_ACTIVITY_FRAGMENT);
     }
 
@@ -70,7 +75,16 @@ public class SimplePlayerActivity extends AppCompatActivity implements SimplePla
 
 
     @Override
-    public void onPlay(SpotifyStreamerTrack spotifyStreamerTrack) {
+    public void play(SpotifyStreamerTrack spotifyStreamerTrack) {
+        mediaPlayerIntent.setAction(SimplePlayerService.ACTION_PLAY);
+        mediaPlayerIntent.putExtra(getString(R.string.spotify_streamer_track), spotifyStreamerTrack);
 
+        // add infos for the service which file to download and where to store
+        startService(mediaPlayerIntent);
+    }
+
+    @Override
+    public void pause(SpotifyStreamerTrack spotifyStreamerTrack) {
+        stopService(mediaPlayerIntent);
     }
 }
