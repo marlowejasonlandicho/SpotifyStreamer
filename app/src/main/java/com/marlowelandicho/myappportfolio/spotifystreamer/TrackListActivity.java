@@ -27,6 +27,8 @@ public class TrackListActivity extends AppCompatActivity implements TrackListAct
         trackListActivityFragment = new TrackListActivityFragment();
         Bundle bundle = (Bundle) trackListActivityIntent.getExtras();
         trackListActivityFragment.setArguments(bundle);
+
+
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.layout_view_track_search_result, trackListActivityFragment, TRACKLIST_ACTIVITY_FRAGMENT)
                 .addToBackStack(null)
@@ -65,7 +67,7 @@ public class TrackListActivity extends AppCompatActivity implements TrackListAct
     }
 
     @Override
-    public void openSimplePlayer(SpotifyStreamerTrack spotifyStreamerTrack) {
+    public void openSimplePlayer(SpotifyStreamerTrack spotifyStreamerTrack, SpotifyStreamerResult spotifyStreamerResult) {
 
 //        Button button = (Button) v.findViewById(R.id.show);
 //        button.setOnClickListener(new OnClickListener() {
@@ -79,7 +81,7 @@ public class TrackListActivity extends AppCompatActivity implements TrackListAct
                 new Intent(this, SimplePlayerActivity.class);
         Bundle bundle = new Bundle();
         bundle.putParcelable(getString(R.string.spotify_streamer_track), spotifyStreamerTrack);
-        bundle.putParcelable(getString(R.string.spotify_streamer_result), this.spotifyStreamerResult);
+        bundle.putParcelable(getString(R.string.spotify_streamer_result), spotifyStreamerResult);
 
         playTrackActivityIntent.putExtras(bundle);
 //        startActivity(playTrackActivityIntent);

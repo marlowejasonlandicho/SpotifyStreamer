@@ -75,28 +75,29 @@
 
         <ImageButton
             android:id="@+id/imageButton_player_prev"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_below="@+id/seekbar_player"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:clickable="false"
-            android:src="@android:drawable/ic_media_previous" />
+            android:src="@android:drawable/ic_media_previous"
+            android:enabled="false" />
 
         <ImageButton
             android:id="@+id/imageButton_player_play"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_below="@+id/seekbar_player"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_toRightOf="@id/imageButton_player_prev"
-            android:src="@android:drawable/ic_media_play" />
+            android:src="@android:drawable/ic_media_play"
+            android:enabled="false" />
 
         <ImageButton
             android:id="@+id/imageButton_player_pause"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_below="@+id/seekbar_player"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
@@ -106,13 +107,14 @@
 
         <ImageButton
             android:id="@+id/imageButton_player_next"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_below="@+id/seekbar_player"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_toRightOf="@id/imageButton_player_play"
-            android:src="@android:drawable/ic_media_next" />
+            android:src="@android:drawable/ic_media_next"
+            android:enabled="false" />
     </LinearLayout>
 
 

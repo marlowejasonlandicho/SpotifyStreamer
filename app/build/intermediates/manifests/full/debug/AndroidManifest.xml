@@ -59,6 +59,7 @@
             </intent-filter>
         </activity>
 
+        <!-- <service android:name=".SimplePlayerActivityFragment$SimplePlayerService"></service> -->
         <service android:name="com.marlowelandicho.myappportfolio.spotifystreamer.SimplePlayerService" />
     </application>
 

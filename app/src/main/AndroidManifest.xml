@@ -44,6 +44,7 @@
             </intent-filter>
         </activity>
 
+        <!--<service android:name=".SimplePlayerActivityFragment$SimplePlayerService"></service>-->
         <service android:name=".SimplePlayerService"></service>
     </application>
 

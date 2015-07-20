@@ -204,6 +204,7 @@
     <string name="input_artist_name_message">Enter artist name here…</string>
     <string name="spotify_exception_message">Oops. There seem to be a problem connecting to Spotify. Please try again later or check your connection.</string>
     <string name="spotify_streamer_artist">com.marlowelandicho.myappportfolio.spotifystreamer.data.SpotifyStreamerArtist</string>
+    <string name="spotify_streamer_artist_top_track">com.marlowelandicho.myappportfolio.spotifystreamer.data.ArtistTopTrack</string>
     <string name="spotify_streamer_result">com.marlowelandicho.myappportfolio.spotifystreamer.SpotifyStreamerResult</string>
     <string name="spotify_streamer_track">com.marlowelandicho.myappportfolio.spotifystreamer.data.SpotifyStreamerTrack</string>
     <string name="text_top_tracks">Top 10 Tracks</string>

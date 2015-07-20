@@ -47,7 +47,7 @@ public class TrackListActivityFragment extends Fragment {
     public interface TrackListListener {
         public void populateResult(SpotifyStreamerResult spotifyStreamerResult);
 
-        public void openSimplePlayer(SpotifyStreamerTrack spotifyStreamerTrack);
+        public void openSimplePlayer(SpotifyStreamerTrack spotifyStreamerTrack, SpotifyStreamerResult spotifyStreamerResult);
     }
 
     public TrackListActivityFragment() {
@@ -66,7 +66,8 @@ public class TrackListActivityFragment extends Fragment {
         }
         if (spotifyStreamerResult != null) {
             artistId = spotifyStreamerResult.getArtistId();
-            localTrackList = spotifyStreamerResult.getArtistTopTracks(artistId);
+//            localTrackList = spotifyStreamerResult.getArtistTopTracks(artistId);
+            localTrackList = spotifyStreamerResult.getArtistTopTracks();
             if (localTrackList != null && localTrackList.size() > 0) {
                 topTrackResultList.addAll(spotifyStreamerResult.getArtistTopTracks(artistId));
             }
@@ -84,7 +85,7 @@ public class TrackListActivityFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 SpotifyStreamerTrack spotifyStreamerTrack = (SpotifyStreamerTrack) parent.getItemAtPosition(position);
-                resultListener.openSimplePlayer(spotifyStreamerTrack);
+                resultListener.openSimplePlayer(spotifyStreamerTrack, spotifyStreamerResult);
             }
         });
         return rootView;
@@ -156,7 +157,8 @@ public class TrackListActivityFragment extends Fragment {
                     topTrackAdapter.add(topTrackResult);
                 }
             }
-            spotifyStreamerResult.addArtistTopTracks(artistId, topTrackResultList);
+//            spotifyStreamerResult.addArtistTopTracks(artistId, topTrackResultList);
+            spotifyStreamerResult.addArtistTopTracks(topTrackResultList);
             topTrackAdapter.notifyDataSetChanged();
         }
 

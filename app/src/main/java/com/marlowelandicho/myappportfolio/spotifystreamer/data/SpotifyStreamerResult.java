@@ -4,9 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by marlowe.landicho on 27/6/15.
@@ -19,8 +17,8 @@ public class SpotifyStreamerResult implements Parcelable {
     private String queryString;
     private int firstVisiblePosition;
     private List<SpotifyStreamerArtist> artists = new ArrayList<>();
-    //    private final List<SpotifyStreamerTrack> artistTopTracks = new ArrayList<>();
-    private Map<String, List<SpotifyStreamerTrack>> artistTopTracks = new HashMap<>();
+    private List<SpotifyStreamerTrack> artistTopTracks = new ArrayList<>();
+//    private Map<String, List<SpotifyStreamerTrack>> artistTopTracks = new HashMap<>();
 
     public static final Parcelable.Creator<SpotifyStreamerResult> CREATOR =
             new Parcelable.Creator<SpotifyStreamerResult>() {
@@ -44,8 +42,8 @@ public class SpotifyStreamerResult implements Parcelable {
         queryString = source.readString();
         firstVisiblePosition = source.readInt();
         source.readList(artists, SpotifyStreamerArtist.class.getClassLoader());
-//        source.readList(artistTopTracks, null);
-        source.readMap(artistTopTracks, SpotifyStreamerTrack.class.getClassLoader());
+        source.readList(artistTopTracks, SpotifyStreamerTrack.class.getClassLoader());
+//        source.readMap(artistTopTracks, SpotifyStreamerTrack.class.getClassLoader());
     }
 
     public String getArtistId() {
@@ -88,21 +86,35 @@ public class SpotifyStreamerResult implements Parcelable {
         this.artists = artists;
     }
 
-    public Map<String, List<SpotifyStreamerTrack>> getArtistTopTracks() {
+    //    public Map<String, List<SpotifyStreamerTrack>> getArtistTopTracks() {
+//        return artistTopTracks;
+//    }
+    public List<SpotifyStreamerTrack> getArtistTopTracks() {
         return artistTopTracks;
     }
 
-    public void setArtistTopTracks(Map<String, List<SpotifyStreamerTrack>> artistTopTracks) {
+    public void setArtistTopTracks(List<SpotifyStreamerTrack> artistTopTracks) {
         this.artistTopTracks = artistTopTracks;
     }
 
+//    public void setArtistTopTracks(Map<String, List<SpotifyStreamerTrack>> artistTopTracks) {
+//        this.artistTopTracks = artistTopTracks;
+//    }
+
     public void addArtistTopTracks(String artistId, List<SpotifyStreamerTrack> tracks) {
         artistTopTracks.clear();
-        artistTopTracks.put(artistId, tracks);
+        artistTopTracks.addAll(tracks);
+//        artistTopTracks.put(artistId, tracks);
+    }
+
+    public void addArtistTopTracks(List<SpotifyStreamerTrack> tracks) {
+        artistTopTracks.clear();
+        artistTopTracks.addAll(tracks);
     }
 
     public List<SpotifyStreamerTrack> getArtistTopTracks(String artistId) {
-        return artistTopTracks.get(artistId);
+//        return artistTopTracks.get(artistId);
+        return artistTopTracks;
     }
 
     public void clearSearchArtistResults() {
@@ -121,8 +133,8 @@ public class SpotifyStreamerResult implements Parcelable {
         dest.writeString(queryString);
         dest.writeInt(firstVisiblePosition);
         dest.writeList(artists);
-//        dest.writeList(artistTopTracks);
-        dest.writeMap(artistTopTracks);
+        dest.writeList(artistTopTracks);
+//        dest.writeMap(artistTopTracks);
     }
 
 

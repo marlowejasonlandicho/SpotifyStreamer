@@ -1693,11 +1693,12 @@ containing a value of this type.
         public static final int input_artist_name_message=0x7f06001a;
         public static final int spotify_exception_message=0x7f06001b;
         public static final int spotify_streamer_artist=0x7f06001c;
-        public static final int spotify_streamer_result=0x7f06001d;
-        public static final int spotify_streamer_track=0x7f06001e;
-        public static final int text_top_tracks=0x7f06001f;
-        public static final int title_activity_simple_player=0x7f060020;
-        public static final int track_no_result=0x7f060021;
+        public static final int spotify_streamer_artist_top_track=0x7f06001d;
+        public static final int spotify_streamer_result=0x7f06001e;
+        public static final int spotify_streamer_track=0x7f06001f;
+        public static final int text_top_tracks=0x7f060020;
+        public static final int title_activity_simple_player=0x7f060021;
+        public static final int track_no_result=0x7f060022;
     }
     public static final class style {
         public static final int AlertDialog_AppCompat=0x7f08006b;
