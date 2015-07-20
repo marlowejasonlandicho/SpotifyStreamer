@@ -51,7 +51,7 @@ public class SimplePlayerActivity extends AppCompatActivity implements SimplePla
                     .commit();
 //        simplePlayerActivityFragment.show(getSupportFragmentManager(), SIMPLEPLAYER_ACTIVITY_FRAGMENT);
 
-            
+
 //            playImageButton = (ImageButton) findViewById(R.id.imageButton_player_play);
 //            pauseImageButton = (ImageButton) findViewById(R.id.imageButton_player_pause);
 //            prevImageButton = (ImageButton) findViewById(R.id.imageButton_player_prev);
@@ -97,6 +97,7 @@ public class SimplePlayerActivity extends AppCompatActivity implements SimplePla
         mediaPlayerIntent.putExtra(getString(R.string.spotify_streamer_result), spotifyStreamerResult);
 
         bindService(mediaPlayerIntent, simplePlayerServiceConnection, Context.BIND_AUTO_CREATE);
+        startService(mediaPlayerIntent);
     }
 
     @Override

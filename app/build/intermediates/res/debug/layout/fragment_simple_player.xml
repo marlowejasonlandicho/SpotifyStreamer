@@ -80,8 +80,7 @@
             android:layout_below="@+id/seekbar_player"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:src="@android:drawable/ic_media_previous"
-            android:enabled="false" />
+            android:src="@android:drawable/ic_media_previous" />
 
         <ImageButton
             android:id="@+id/imageButton_player_play"
@@ -91,8 +90,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_toRightOf="@id/imageButton_player_prev"
-            android:src="@android:drawable/ic_media_play"
-            android:enabled="false" />
+            android:src="@android:drawable/ic_media_play" />
 
         <ImageButton
             android:id="@+id/imageButton_player_pause"
@@ -113,8 +111,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_toRightOf="@id/imageButton_player_play"
-            android:src="@android:drawable/ic_media_next"
-            android:enabled="false" />
+            android:src="@android:drawable/ic_media_next" />
     </LinearLayout>
 
 

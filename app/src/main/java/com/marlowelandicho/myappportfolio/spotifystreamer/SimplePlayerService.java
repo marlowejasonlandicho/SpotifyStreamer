@@ -10,10 +10,12 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.wifi.WifiManager;
 import android.os.Binder;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.util.Log;
 
+import com.marlowelandicho.myappportfolio.spotifystreamer.data.SpotifyStreamerResult;
 import com.marlowelandicho.myappportfolio.spotifystreamer.data.SpotifyStreamerTrack;
 
 import java.io.IOException;
@@ -30,6 +32,7 @@ public class SimplePlayerService extends Service implements
     private NotificationManager notificationManager;
     private MediaPlayer mediaPlayer;
     private final String LOG_TAG = SimplePlayerService.class.getSimpleName();
+    private SpotifyStreamerResult spotifyStreamerResult;
     private SpotifyStreamerTrack spotifyStreamerTrack;
     private WifiManager.WifiLock wifiLock;
 
@@ -74,7 +77,6 @@ public class SimplePlayerService extends Service implements
         mediaPlayer.start();
 
 
-
         createNotification();
 //            AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 //            int result = audioManager.requestAudioFocus(this, AudioManager.STREAM_MUSIC,
@@ -87,6 +89,8 @@ public class SimplePlayerService extends Service implements
     @Override
     public IBinder onBind(Intent intent) {
         spotifyStreamerTrack = intent.getParcelableExtra(getString(R.string.spotify_streamer_track));
+        spotifyStreamerResult = intent.getParcelableExtra(getString(R.string.spotify_streamer_result));
+
         initMediaPlayer();
         return simplePlayerServiceBinder;
     }
@@ -135,7 +139,7 @@ public class SimplePlayerService extends Service implements
             mediaPlayer = null;
         }
         wifiLock.release();
-//        stopForeground(true);
+        stopForeground(true);
     }
 
     @Override
@@ -181,9 +185,17 @@ public class SimplePlayerService extends Service implements
     }
 
     private void createNotification() {
-        PendingIntent pi = PendingIntent.getActivity(this, 0,
-                new Intent(this, SimplePlayerActivity.class),
-                PendingIntent.FLAG_UPDATE_CURRENT);
+
+
+        Intent notificationIntent = new Intent(this, SimplePlayerActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(getString(R.string.spotify_streamer_result), this.spotifyStreamerResult);
+        bundle.putParcelable(getString(R.string.spotify_streamer_track), this.spotifyStreamerTrack);
+
+        notificationIntent.putExtras(bundle);
+        PendingIntent pi = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+
         Notification notification = new Notification();
 //        notification.contentIntent = pi;
         notification.tickerText = "Now playing: " + spotifyStreamerTrack.getTrackName() + " - " + spotifyStreamerTrack.getArtistName();
