@@ -85,7 +85,9 @@ public class SpotifyStreamerMainActivity extends AppCompatActivity implements Se
 //                this.spotifyStreamerResult.getArtistId(),
 //                this.spotifyStreamerResult.getArtistTopTracks(this.spotifyStreamerResult.getArtistId()));
 
-        spotifyStreamerResult.addArtistTopTracks(this.spotifyStreamerResult.getArtistTopTracks());
+        if (spotifyStreamerResult.getArtistId().equals(this.spotifyStreamerResult.getArtistId())) {
+            spotifyStreamerResult.addArtistTopTracks(this.spotifyStreamerResult.getArtistTopTracks());
+        }
 
         Bundle bundle = new Bundle();
         bundle.putParcelable(getString(R.string.spotify_streamer_result), spotifyStreamerResult);

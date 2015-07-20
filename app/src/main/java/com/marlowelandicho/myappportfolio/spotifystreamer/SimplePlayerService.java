@@ -75,8 +75,6 @@ public class SimplePlayerService extends Service implements
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         mediaPlayer = player;
         mediaPlayer.start();
-
-
         createNotification();
 //            AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 //            int result = audioManager.requestAudioFocus(this, AudioManager.STREAM_MUSIC,
@@ -91,7 +89,7 @@ public class SimplePlayerService extends Service implements
         spotifyStreamerTrack = intent.getParcelableExtra(getString(R.string.spotify_streamer_track));
         spotifyStreamerResult = intent.getParcelableExtra(getString(R.string.spotify_streamer_result));
 
-        initMediaPlayer();
+//        initMediaPlayer();
         return simplePlayerServiceBinder;
     }
 
@@ -99,8 +97,21 @@ public class SimplePlayerService extends Service implements
         return mediaPlayer;
     }
 
-    public void play() {
-        mediaPlayer.start();
+    public void play(SpotifyStreamerTrack playSpotifyStreamerTrack) {
+        this.spotifyStreamerTrack = playSpotifyStreamerTrack;
+        if (mediaPlayer == null) {
+            initMediaPlayer();
+        } else if (mediaPlayer.isPlaying()) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+            mediaPlayer = null;
+            wifiLock.release();
+            stopForeground(true);
+            initMediaPlayer();
+        } else if (!mediaPlayer.isPlaying()) {
+            mediaPlayer.start();
+            createNotification();
+        }
     }
 
     public void pause() {
@@ -113,6 +124,7 @@ public class SimplePlayerService extends Service implements
         mediaPlayer = null;
         wifiLock.release();
         spotifyStreamerTrack = prevSpotifyStreamerTrack;
+        stopForeground(true);
         initMediaPlayer();
     }
 
@@ -122,6 +134,7 @@ public class SimplePlayerService extends Service implements
         mediaPlayer = null;
         wifiLock.release();
         spotifyStreamerTrack = nextSpotifyStreamerTrack;
+        stopForeground(true);
         initMediaPlayer();
     }
 
@@ -135,6 +148,7 @@ public class SimplePlayerService extends Service implements
         super.onDestroy();
         notificationManager.cancel(NOTIFICATION_ID);
         if (mediaPlayer != null) {
+            mediaPlayer.stop();
             mediaPlayer.release();
             mediaPlayer = null;
         }
@@ -197,13 +211,38 @@ public class SimplePlayerService extends Service implements
 
 
         Notification notification = new Notification();
-//        notification.contentIntent = pi;
+
+//        Notification notification = new Notification.Builder(this)
+//                .setContentTitle("New mail from " + "test@gmail.com")
+//                .setContentText("Subject")
+//                .setSmallIcon(R.mipmap.ic_launcher)
+//                .setContentIntent(pi)
+//                .setAutoCancel(true)
+//                .addAction(R.mipmap.ic_launcher, "Play", pi)
+//                .addAction(R.mipmap.ic_launcher, "Pause", pi)
+//                .addAction(R.mipmap.ic_launcher, "Previous", pi)
+//                .addAction(R.mipmap.ic_launcher, "Next", pi).build();
+
+
         notification.tickerText = "Now playing: " + spotifyStreamerTrack.getTrackName() + " - " + spotifyStreamerTrack.getArtistName();
         notification.icon = R.mipmap.ic_launcher;
+
+//        Bitmap imageIcon = null;
+//        try {
+//            imageIcon =
+//                    Picasso.with(getApplicationContext())
+//                            .load(spotifyStreamerTrack.getThumbnailUrl())
+//                            .resize(50, 50)
+//                            .centerCrop().get();
+////            notification.largeIcon = imageIcon;
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         notification.flags |= Notification.FLAG_ONGOING_EVENT;
-        notification.setLatestEventInfo(this, "SimplePlayer",
+        notification.setLatestEventInfo(this, spotifyStreamerTrack.getArtistName(),
                 "Playing: " + spotifyStreamerTrack.getTrackName(), pi);
-//        notificationManager.notify(NOTIFICATION_ID, notification);
+        //notificationManager.notify(NOTIFICATION_ID, notification);
         startForeground(NOTIFICATION_ID, notification);
     }
 

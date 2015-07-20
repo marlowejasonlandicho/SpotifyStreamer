@@ -15,6 +15,7 @@ public class SpotifyStreamerTrack implements Parcelable {
     private String thumbnailUrl;
     private String trackUrl;
     private String previewUrl;
+    private Integer position;
 
     public static final Parcelable.Creator<SpotifyStreamerTrack> CREATOR =
             new Parcelable.Creator<SpotifyStreamerTrack>() {
@@ -40,6 +41,7 @@ public class SpotifyStreamerTrack implements Parcelable {
         thumbnailUrl = source.readString();
         trackUrl = source.readString();
         previewUrl = source.readString();
+        position = source.readInt();
     }
 
     public String getArtistId() {
@@ -98,6 +100,14 @@ public class SpotifyStreamerTrack implements Parcelable {
         this.previewUrl = previewUrl;
     }
 
+    public Integer getPosition() {
+        return position;
+    }
+
+    public void setPosition(Integer position) {
+        this.position = position;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -112,5 +122,7 @@ public class SpotifyStreamerTrack implements Parcelable {
         dest.writeString(thumbnailUrl);
         dest.writeString(trackUrl);
         dest.writeString(previewUrl);
+        dest.writeInt(position);
     }
+
 }

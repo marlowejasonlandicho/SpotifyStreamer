@@ -119,6 +119,7 @@ public class SpotifyStreamerResult implements Parcelable {
 
     public void clearSearchArtistResults() {
         artists.clear();
+        artistTopTracks.clear();
     }
 
     @Override

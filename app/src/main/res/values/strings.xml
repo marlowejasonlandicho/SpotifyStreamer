@@ -17,4 +17,5 @@
     <string name="spotify_streamer_artist">com.marlowelandicho.myappportfolio.spotifystreamer.data.SpotifyStreamerArtist</string>
     <string name="spotify_streamer_artist_top_track">com.marlowelandicho.myappportfolio.spotifystreamer.data.ArtistTopTrack</string>
     <string name="spotify_streamer_track">com.marlowelandicho.myappportfolio.spotifystreamer.data.SpotifyStreamerTrack</string>
+    <string name="artist_no_more_track">No more tracks available</string>
 </resources>

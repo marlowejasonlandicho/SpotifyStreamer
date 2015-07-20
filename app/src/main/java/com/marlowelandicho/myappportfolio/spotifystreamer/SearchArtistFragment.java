@@ -101,7 +101,6 @@ public class SearchArtistFragment extends Fragment {
 
                 spotifyStreamerResult.setArtistId(selectedArtist.getArtistId());
                 spotifyStreamerResult.setArtistName(selectedArtist.getArtistName());
-
                 spotifyStreamerResult.setQueryString(q);
                 spotifyStreamerResult.clearSearchArtistResults();
                 spotifyStreamerResult.getArtists().addAll(searchArtistResultList);

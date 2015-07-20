@@ -175,12 +175,15 @@ public class TrackListActivityFragment extends Fragment {
                 Tracks topTracks = spotifyService.getArtistTopTrack(artistIdParam, paramMap);
                 List<Track> topTracksList = topTracks.tracks;
 
-                for (Track track : topTracksList) {
+                for (int i = 0; i < topTracksList.size(); i++) {
+                    Track track = topTracksList.get(i);
                     SpotifyStreamerTrack spotifyStreamerTrack = new SpotifyStreamerTrack();
                     spotifyStreamerTrack.setArtistId(track.id);
                     spotifyStreamerTrack.setArtistName(spotifyStreamerResult.getArtistName());
                     spotifyStreamerTrack.setAlbumName(track.album.name);
                     spotifyStreamerTrack.setTrackName(track.name);
+                    spotifyStreamerTrack.setPosition(new Integer(i));
+
                     for (Image image : track.album.images) {
                         if (image.height <= 200 && image.url != null) {
                             spotifyStreamerTrack.setThumbnailUrl(image.url);

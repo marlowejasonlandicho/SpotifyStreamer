@@ -24,7 +24,8 @@ public class SimplePlayerActivity extends AppCompatActivity implements SimplePla
     private static final String SIMPLEPLAYER_ACTIVITY_FRAGMENT = "SPTAG";
 
     private SimplePlayerService simplePlayerService;
-    boolean serviceBound = false;
+    private boolean serviceBound = false;
+    Intent mediaPlayerIntent;
 
     private SpotifyStreamerResult spotifyStreamerResult;
     private SpotifyStreamerTrack spotifyStreamerTrack;
@@ -34,6 +35,7 @@ public class SimplePlayerActivity extends AppCompatActivity implements SimplePla
     private ImageButton pauseImageButton;
     private ImageButton prevImageButton;
     private ImageButton nextImageButton;
+
     private SeekBar seekBar;
 
 
@@ -52,10 +54,10 @@ public class SimplePlayerActivity extends AppCompatActivity implements SimplePla
 //        simplePlayerActivityFragment.show(getSupportFragmentManager(), SIMPLEPLAYER_ACTIVITY_FRAGMENT);
 
 
-//            playImageButton = (ImageButton) findViewById(R.id.imageButton_player_play);
-//            pauseImageButton = (ImageButton) findViewById(R.id.imageButton_player_pause);
-//            prevImageButton = (ImageButton) findViewById(R.id.imageButton_player_prev);
-//            nextImageButton = (ImageButton) findViewById(R.id.imageButton_player_next);
+            playImageButton = (ImageButton) findViewById(R.id.imageButton_player_play);
+            pauseImageButton = (ImageButton) findViewById(R.id.imageButton_player_pause);
+            prevImageButton = (ImageButton) findViewById(R.id.imageButton_player_prev);
+            nextImageButton = (ImageButton) findViewById(R.id.imageButton_player_next);
 //
 //            playImageButton.setEnabled(true);
 //            prevImageButton.setEnabled(true);
@@ -92,7 +94,7 @@ public class SimplePlayerActivity extends AppCompatActivity implements SimplePla
     @Override
     protected void onStart() {
         super.onStart();
-        Intent mediaPlayerIntent = new Intent(this, SimplePlayerService.class);
+        mediaPlayerIntent = new Intent(this, SimplePlayerService.class);
         mediaPlayerIntent.putExtra(getString(R.string.spotify_streamer_track), spotifyStreamerTrack);
         mediaPlayerIntent.putExtra(getString(R.string.spotify_streamer_result), spotifyStreamerResult);
 
@@ -141,7 +143,7 @@ public class SimplePlayerActivity extends AppCompatActivity implements SimplePla
 
     @Override
     public void play(SpotifyStreamerTrack spotifyStreamerTrack) {
-        simplePlayerService.play();
+        simplePlayerService.play(spotifyStreamerTrack);
     }
 
     @Override
@@ -156,12 +158,39 @@ public class SimplePlayerActivity extends AppCompatActivity implements SimplePla
 
     @Override
     public void next(SpotifyStreamerTrack spotifyStreamerTrack) {
+//        stopService(mediaPlayerIntent);
+//        unbindService(simplePlayerServiceConnection);
+//        simplePlayerActivityFragment = new SimplePlayerActivityFragment();
+//        Bundle bundle = new Bundle();
+//        bundle.putParcelable(getString(R.string.spotify_streamer_result), this.spotifyStreamerResult);
+//        bundle.putParcelable(getString(R.string.spotify_streamer_track), spotifyStreamerTrack);
+//        simplePlayerActivityFragment.setArguments(bundle);
         simplePlayerService.next(spotifyStreamerTrack);
+//        getSupportFragmentManager().beginTransaction()
+//                .replace(R.id.simple_player, simplePlayerActivityFragment, SIMPLEPLAYER_ACTIVITY_FRAGMENT)
+//                .addToBackStack(null)
+//                .commit();
+
+//        mediaPlayerIntent = new Intent(this, SimplePlayerService.class);
+//        mediaPlayerIntent.putExtra(getString(R.string.spotify_streamer_track), spotifyStreamerTrack);
+//        mediaPlayerIntent.putExtra(getString(R.string.spotify_streamer_result), spotifyStreamerResult);
+//        bindService(mediaPlayerIntent, simplePlayerServiceConnection, Context.BIND_AUTO_CREATE);
+//        startService(mediaPlayerIntent);
+
     }
 
     @Override
     public void previous(SpotifyStreamerTrack spotifyStreamerTrack) {
+//        simplePlayerActivityFragment = new SimplePlayerActivityFragment();
+//        Bundle bundle = new Bundle();
+//        bundle.putParcelable(getString(R.string.spotify_streamer_result), this.spotifyStreamerResult);
+//        bundle.putParcelable(getString(R.string.spotify_streamer_track), spotifyStreamerTrack);
+//        simplePlayerActivityFragment.setArguments(bundle);
         simplePlayerService.previous(spotifyStreamerTrack);
+//        getSupportFragmentManager().beginTransaction()
+//                .replace(R.id.simple_player, simplePlayerActivityFragment, SIMPLEPLAYER_ACTIVITY_FRAGMENT)
+//                .addToBackStack(null)
+//                .commit();
     }
 
     @Override
